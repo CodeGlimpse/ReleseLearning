@@ -7,6 +7,11 @@
 </head>
 <body>
 <!--th:text 为 Thymeleaf 属性，用于获取指定属性的值-->
-<h1 th:text="'欢迎来到'+${name}"></h1>
+    <h1>登录</h1>
+    <form th:attr="action=@{}">
+        账号：<input type="text" name="userId" /><br>
+        密码：<input type="password" name="password" /><br>
+        <input type="submit" value="登录">
+    </form>
 </body>
 </html>
