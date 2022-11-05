@@ -43,11 +43,16 @@ public class TeacherServiceImp implements TeacherService{
 
     @Override
     public Teacher findByTeacherId(String id) {
+        System.out.println(id);
         Optional<Teacher> optional = teacherDAO.findById(id);
-        Teacher teacher = optional.get();
-        if(teacher!=null){
-            return teacher;
+        if(optional != null && optional.isPresent()) {
+            Teacher teacher = optional.get();
+            if(teacher!=null){
+                System.out.println("hhh  " + teacher);
+                return teacher;
+            }
         }
+
         return null;
     }
 }

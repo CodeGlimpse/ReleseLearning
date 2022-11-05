@@ -8,10 +8,16 @@
 <body>
 <!--th:text 为 Thymeleaf 属性，用于获取指定属性的值-->
     <h1>登录</h1>
-    <form th:attr="action=@{}">
+    <form method="get" th:attr="action=@{/checkLogin/student}">
+<!--        @{/androidStudent/student/userId}-->
         账号：<input type="text" name="userId" /><br>
         密码：<input type="password" name="password" /><br>
-        <input type="submit" value="登录">
+<!--        <input type="submit" value="登录">-->
+        老师登录：<input type="radio" value="学生" name="che">
+        学生登录：<input type="radio" value="老师" name="che"><br>
+        <a href="../register_stu">学生注册</a>
+        <a href="../register_tea">教师注册</a>
+        <input type="submit">
     </form>
 </body>
 </html>

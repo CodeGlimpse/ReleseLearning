@@ -28,11 +28,13 @@ public class StudentServiceImp implements StudentService{
     @Override
     public String findAllAttribute(String studentId) {
         Optional<Student> optional = studentDAO.findById(studentId);
-        Student student = optional.get();
-        if(student!=null){
-            String json = JSON.toJSONString(student);
-            System.out.println(json);
-            return json;
+        if (optional != null && optional.isPresent()) {
+            Student student = optional.get();
+            if(student!=null){
+                String json = JSON.toJSONString(student);
+                System.out.println(json);
+                return json;
+            }
         }
         return "false";
     }
@@ -41,9 +43,11 @@ public class StudentServiceImp implements StudentService{
     @Override
     public Student findByStudentId(String studentId) {
         Optional<Student> optional = studentDAO.findById(studentId);
-        Student student = optional.get();
-        if(student!=null){
-            return student;
+        if(optional != null && optional.isPresent()){
+            Student student = optional.get();
+            if(student!=null){
+                return student;
+            }
         }
         return null;
     }
