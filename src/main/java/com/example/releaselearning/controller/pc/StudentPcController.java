@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/pcStudent")
 public class StudentPcController {
     @Autowired
-    private StudentService service;
+    StudentService service;
 
     //增加一名学生
     @GetMapping("/register_stu/{id}" +
@@ -50,8 +50,4 @@ public class StudentPcController {
         }
         return modelAndView;
     }
-
-
-
-
 }
