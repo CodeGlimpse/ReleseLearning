@@ -27,4 +27,5 @@ public class TecIndexController {
         //返回页面teacher.html
         return "teacher";
     }
+
 }

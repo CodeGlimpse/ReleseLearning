@@ -31,4 +31,5 @@ public class StuIndexController {
         //返回页面student.html
         return "student";
     }
+
 }
