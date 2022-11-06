@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ReleseLearningApplication {
 
     public static void main(String[] args) {
+
         SpringApplication.run(ReleseLearningApplication.class, args);
     }
 
