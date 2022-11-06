@@ -1,6 +1,6 @@
 package com.example.releaselearning.service;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.example.releaselearning.entity.Student;
 import com.example.releaselearning.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +28,11 @@ public class StudentServiceImp implements StudentService{
     @Override
     public String findAllAttribute(String studentId) {
         Optional<Student> optional = studentDAO.findById(studentId);
-        if (optional != null && optional.isPresent()) {
-            Student student = optional.get();
-            if(student!=null){
-                String json = JSON.toJSONString(student);
-                System.out.println(json);
-                return json;
-            }
+        Student student = optional.get();
+        if(student!=null){
+            String json = JSON.toJSONString(student);
+            System.out.println(json);
+            return json;
         }
         return "false";
     }
@@ -43,11 +41,9 @@ public class StudentServiceImp implements StudentService{
     @Override
     public Student findByStudentId(String studentId) {
         Optional<Student> optional = studentDAO.findById(studentId);
-        if(optional != null && optional.isPresent()){
-            Student student = optional.get();
-            if(student!=null){
-                return student;
-            }
+        Student student = optional.get();
+        if(student!=null){
+            return student;
         }
         return null;
     }

@@ -24,7 +24,6 @@ public class CheckLogin {
         map.put("name", "Themeleaf");
         System.out.println(userId+ " " +password +" "+ che);
         if(che.equals("老师")){
-
             //通过student_id得到学生的个人信息
             Teacher teacher =  serviceTeacher.findByTeacherId(userId);
             System.out.println(teacher);
@@ -38,7 +37,6 @@ public class CheckLogin {
         }else{
             //通过student_id得到学生的个人信息
             Student student= serviceStudent.findByStudentId(userId);
-
             System.out.println(student);
             if(student == null){
                 return "login";

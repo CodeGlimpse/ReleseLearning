@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>教师端</title>
@@ -9,5 +9,7 @@
 <p th:text="'教工号:'+${teacher_id}"></p>
 <a href="../student">加入班级</a><br>
 <a href="student">班级管理</a><br>
+<a th:href="@{/tec/getTeacherClassList(teacherId=${teacher_id},teacherName=${name})}">班级列表</a><br>
+<a th:href="@{/tec/getTeacherHomeworkList(teacherId=${teacher_id},teacherName=${name})}">作业列表</a>
 </body>
 </html>

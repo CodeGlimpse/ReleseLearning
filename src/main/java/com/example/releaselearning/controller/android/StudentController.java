@@ -1,6 +1,5 @@
 package com.example.releaselearning.controller.android;
 
-import cn.hutool.http.HttpResponse;
 import com.example.releaselearning.entity.Student;
 import com.example.releaselearning.service.StudentService;
 import com.example.releaselearning.service.StudentServiceImp;

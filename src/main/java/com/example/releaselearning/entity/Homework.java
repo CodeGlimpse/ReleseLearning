@@ -5,6 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "tbl_homework")
@@ -12,9 +13,9 @@ public class Homework implements Serializable {
     @Id
     private String homeworkId;
     @NotEmpty(message = "作业开始时间")
-    private String homeworkBeginTime;
+    private Date homeworkBeginTime;
     @NotEmpty(message = "作业开始时间")
-    private String homeworkEndTime;
+    private Date homeworkEndTime;
     @NotEmpty(message = "作业开始时间")
     private String homeworkContent;
     @NotEmpty(message = "作业开始时间")
@@ -30,19 +31,19 @@ public class Homework implements Serializable {
         this.homeworkId = homeworkId;
     }
 
-    public String getHomeworkBeginTime() {
+    public Date getHomeworkBeginTime() {
         return homeworkBeginTime;
     }
 
-    public void setHomeworkBeginTime(String homeworkBeginTime) {
+    public void setHomeworkBeginTime(Date homeworkBeginTime) {
         this.homeworkBeginTime = homeworkBeginTime;
     }
 
-    public String getHomeworkEndTime() {
+    public Date getHomeworkEndTime() {
         return homeworkEndTime;
     }
 
-    public void setHomeworkEndTime(String homeworkEndTime) {
+    public void setHomeworkEndTime(Date homeworkEndTime) {
         this.homeworkEndTime = homeworkEndTime;
     }
 

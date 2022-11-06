@@ -1,6 +1,6 @@
 package com.example.releaselearning.service;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.example.releaselearning.entity.Teacher;
 import com.example.releaselearning.repository.TeacherRepository;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -43,16 +43,11 @@ public class TeacherServiceImp implements TeacherService{
 
     @Override
     public Teacher findByTeacherId(String id) {
-        System.out.println(id);
         Optional<Teacher> optional = teacherDAO.findById(id);
-        if(optional != null && optional.isPresent()) {
-            Teacher teacher = optional.get();
-            if(teacher!=null){
-                System.out.println("hhh  " + teacher);
-                return teacher;
-            }
+        Teacher teacher = optional.get();
+        if(teacher!=null){
+            return teacher;
         }
-
         return null;
     }
 }
