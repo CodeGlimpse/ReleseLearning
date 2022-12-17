@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Builder
 @AllArgsConstructor
@@ -22,18 +23,13 @@ public class Student {
     @Column(name = "name")
     private String name;
 
-    @NotEmpty(message = "班级不能为空")
+    @NotNull(message = "班级不能为空")
     @ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.MERGE)
-    @JoinColumn(name = "class")
+    @JoinColumn(name = "class_id")
     private Class classId;
 
     @NotEmpty(message = "密码不能为空")
     @Column(name = "password")
     private String password;
-
-    @Override
-    public String toString() {
-        return "Student{" + "studentId='" + studentId + '\'' + ", name='" + name + '\'' + ", classId='" + classId + '\'' + ", password='" + password + '\'' + '}';
-    }
 
 }

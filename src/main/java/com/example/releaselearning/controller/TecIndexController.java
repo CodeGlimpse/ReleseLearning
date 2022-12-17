@@ -28,10 +28,12 @@ public class TecIndexController {
             String teacherId){
         //通过teacherId得到教师的个人信息
         Optional<Teacher> teacher= teacherRepository.findById(teacherId);
-        String name= teacher.get().getName();
-        //将得到的所有信息输入到map
-        map.put("teacher_id", teacherId);
-        map.put("name",name);
+        if (teacher.isPresent()){
+            String name= teacher.get().getName();
+            //将得到的所有信息输入到map
+            map.put("teacher_id", teacherId);
+            map.put("name",name);
+        }
         //返回页面teacher.html
         return "teacher";
     }

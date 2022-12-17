@@ -27,34 +27,38 @@ public class LoginController {
     public String getCreateLoginPage() {
         return "login";
     }
-    @PostMapping ("/login")
+
+    @PostMapping("/login")
     public String postCreateLoginPage() {
         return "login";
     }
 
     //登陆验证检查
     @PostMapping("/check")
-    public ModelAndView checkLogin(String userId , String password , String che){
+    public ModelAndView checkLogin(String userId, String password, String che) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/login");
 
-        System.out.println(userId+ " " +password +" "+ che);//test
+        System.out.println(userId + " " + password + " " + che);//test
 
-        if(che.equals("teacher")){
-            Optional<Teacher> teacher =  teacherRepository.findById(userId);
+        if (che.equals("teacher")) {
+            Optional<Teacher> teacher = teacherRepository.findById(userId);
+            if (teacher.isPresent()) {
+                System.out.println(teacher);//test
 
-            System.out.println(teacher);//test
-
-            if(teacher.get().getPassword().equals(password)){
-                modelAndView.setViewName("redirect:/tec/index/" + userId);
+                if (teacher.get().getPassword().equals(password)) {
+                    modelAndView.setViewName("redirect:/tec/index/" + userId);
+                }
             }
-        }else{
-            Optional<Student> student= studentRepository.findById(userId);
+        } else {
+            Optional<Student> student = studentRepository.findById(userId);
 
-            System.out.println(student);//test
+            if (student.isPresent()) {
+                System.out.println(student);//test
 
-            if(student.get().getPassword().equals(password)){
-                modelAndView.setViewName("redirect:/stu/index/" + userId);
+                if (student.get().getPassword().equals(password)) {
+                    modelAndView.setViewName("redirect:/stu/index/" + userId);
+                }
             }
         }
         return modelAndView;

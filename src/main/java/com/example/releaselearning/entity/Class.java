@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Builder
 @AllArgsConstructor
@@ -18,7 +19,7 @@ public class Class {
     @Column(name = "class_id")
     private String classId;
 
-    @NotEmpty(message = "所属老师为空")
+    @NotNull(message = "所属老师为空")
     @ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.MERGE)
     @JoinColumn(name = "teacher_id")
     private Teacher teacherId;
