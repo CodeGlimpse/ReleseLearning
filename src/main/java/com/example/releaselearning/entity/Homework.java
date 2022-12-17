@@ -1,73 +1,50 @@
 package com.example.releaselearning.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
-import java.io.Serializable;
-import java.util.Date;
+import lombok.*;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "tbl_homework")
-public class Homework implements Serializable {
+public class Homework {
+
     @Id
+    @NotEmpty(message = "作业题目不能为空")
+    @Column(name = "homework_id")
     private String homeworkId;
-    @NotEmpty(message = "作业开始时间")
-    private Date homeworkBeginTime;
-    @NotEmpty(message = "作业开始时间")
-    private Date homeworkEndTime;
-    @NotEmpty(message = "作业开始时间")
+
+    @NotEmpty(message = "作业开始时间不能为空")
+    @Column(name = "homework_begin_time")
+    private String homeworkBeginTime;
+
+    @NotEmpty(message = "作业结束时间不能为空")
+    @Column(name = "homework_end_time")
+    private String homeworkEndTime;
+
+    @NotEmpty(message = "作业内容不能为空")
+    @Column(name = "homework_content")
     private String homeworkContent;
-    @NotEmpty(message = "作业开始时间")
-    private String classId;
-    @NotEmpty(message = "作业开始时间")
-    private String teacherId;
 
-    public String getHomeworkId() {
-        return homeworkId;
-    }
+    @NotEmpty(message = "所属学生不能为空")
+    @ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.MERGE)
+    @JoinColumn(name = "student")
+    private Student student;
 
-    public void setHomeworkId(String homeworkId) {
-        this.homeworkId = homeworkId;
-    }
+    @NotEmpty(message = "分数不能为空")
+    @Column(name = "score")
+    private int score;
 
-    public Date getHomeworkBeginTime() {
-        return homeworkBeginTime;
-    }
+    @NotEmpty(message = "作业状态不能为空")
+    @Column(name = "status")
+    private String status;
 
-    public void setHomeworkBeginTime(Date homeworkBeginTime) {
-        this.homeworkBeginTime = homeworkBeginTime;
-    }
-
-    public Date getHomeworkEndTime() {
-        return homeworkEndTime;
-    }
-
-    public void setHomeworkEndTime(Date homeworkEndTime) {
-        this.homeworkEndTime = homeworkEndTime;
-    }
-
-    public String getHomeworkContent() {
-        return homeworkContent;
-    }
-
-    public void setHomeworkContent(String homeworkContent) {
-        this.homeworkContent = homeworkContent;
-    }
-
-    public String getClassId() {
-        return classId;
-    }
-
-    public void setClassId(String classId) {
-        this.classId = classId;
-    }
-
-    public String getTeacherId() {
-        return teacherId;
-    }
-
-    public void setTeacherId(String teacherId) {
-        this.teacherId = teacherId;
-    }
+    @NotEmpty(message = "作业类型判断不能为空")
+    @Column(name = "exam")
+    private int exam;
 }

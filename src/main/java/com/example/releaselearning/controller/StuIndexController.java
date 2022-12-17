@@ -1,7 +1,7 @@
 package com.example.releaselearning.controller;
 
 import com.example.releaselearning.entity.Student;
-import com.example.releaselearning.service.StudentService;
+import com.example.releaselearning.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,24 +10,30 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Map;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/stu")
 public class StuIndexController {
     @Autowired
-    StudentService service;
+    private StudentRepository studentRepository;
 
-    @GetMapping("/getStudentIndex/{studentId}")
+    @GetMapping("/index/{studentId}")
     public String getStudentIndex(Map<String,Object> map, @PathVariable("studentId")
             String studentId){
+        return postStudentIndex(map,studentId);
+    }
+    @PostMapping("/index/{studentId}")
+    public String postStudentIndex(Map<String,Object> map, @PathVariable("studentId")
+            String studentId){
         //通过student_id得到学生的个人信息
-        Student student= service.findByStudentId(studentId);
+        Optional<Student> student= studentRepository.findById(studentId);
         //将得到的所有信息输入到map
-        String name=student.getName();
-        String classid=student.getClassId();
+        String name=student.get().getName();
+        String class_id =student.get().getClassId().getClassId();
         map.put("name",name);
         map.put("student_id",studentId);
-        map.put("class", classid);
+        map.put("class", class_id);
         //返回页面student.html
         return "student";
     }

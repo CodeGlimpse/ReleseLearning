@@ -1,31 +1,30 @@
 <!DOCTYPE html>
-<!--导入thymeleaf的名称空间-->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-
-
-
+    <title>登录</title>
 </head>
 <body>
-<!--th:text 为 Thymeleaf 属性，用于获取指定属性的值-->
-    <div style="text-align: center">
-        <h1>登录</h1>
-        <form method="get" th:attr="action=@{/checkLogin/student}">
-            <!--        @{/androidStudent/student/userId}-->
-            账号：<input type="text" name="userId" style="margin-top: 20px"/><br>
-            密码：<input type="password" name="password" style="margin-top: 20px"/><br>
-            <!--        <input type="submit" value="登录">-->
-            老师登录：<input type="radio" value="学生" name="che" style="margin-top: 20px">
-            学生登录：<input type="radio" value="老师" name="che" style="margin-top: 20px"><br>
-            <div style="margin-top: 20px">
-                <a href="../register_stu" style="margin-right: 10px">学生注册</a>
-                <a href="../register_tea" style="margin-right: 10px">教师注册</a>
-                <input type="submit">
-            </div>
-
-        </form>
-    </div>
+<h1>登录</h1>
+<form th:action="@{/check}" th:method="post">
+    <label>
+        账号：
+        <input name="userId" type="text"/>
+    </label><br>
+    <label>
+        密码：
+        <input name="password" type="password"/>
+    </label><br>
+    <label>
+        老师登录：
+        <input name="che" type="radio" value="teacher">
+    </label>
+    <label>
+        学生登录：
+        <input name="che" type="radio" value="student">
+    </label><br>
+    <a th:href="@{register}">注册</a>
+    <input type="submit" value="登录">
+</form>
 </body>
 </html>

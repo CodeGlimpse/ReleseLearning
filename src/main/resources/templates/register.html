@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>注册</title>
+</head>
+<body>
+<button onclick="stuRegister()">注册学生账号</button>
+<button onclick="tecRegister()">注册老师账号</button>
+<div id="student" style="display: none">
+    <form th:action="@{/register/student}" th:method='post'>
+        账号：<input name="id" type="text"/><br>
+        名字：<input name="name" type="text"/><br>
+        密码：<input class="password" name="password" type="password"/><br>
+        确认密码：<input class="secondPassword" name="secondPassword" type="password"/><br>
+        所属班级：<input name="studentId" type="text"/><br>
+        <input class="submit" type="submit" value="学生注册"/>
+        <span class="ts"></span>
+    </form>
+</div>
+<div id="teacher" style="display: none">
+    <form th:action="@{/register/teacher}" th:method='post'>
+        账号：<input name="id" type="text"/><br>
+        名字：<input name="name" type="text"/><br>
+        密码：<input class="password" name="password" type="password"/><br>
+        确认密码：<input class="secondPassword" name="secondPassword" type="password"/><br>
+        <input class="submit" type="submit" value="老师注册"/>
+        <span class="ts"></span>
+    </form>
+</div>
+
+<script type="text/javascript">
+
+    //学生注册表单
+    function stuRegister() {
+        document.getElementById("student").style.display = "block";
+        document.getElementById("teacher").style.display = "none";
+    }
+
+    //老师注册表单
+    function tecRegister() {
+        document.getElementById("teacher").style.display = "block";
+        document.getElementById("student").style.display = "none";
+    }
+
+    //验证密码和确认密码是否一致
+    document.getElementsByClassName("secondPassword")[0].addEventListener("focus", checkPwd);
+    document.getElementsByClassName("secondPassword")[0].addEventListener("blur", checkPwd);
+
+    function checkPwd() {
+        if (!$(".secondPassword").val()) {
+            $(".ts").text("请输入确认密码").show();
+        } else if ($(".password").val() !== $(".secondPassword").val()) {
+            $(".ts").text("两次密码输入不一致").show();
+        } else {
+            $(".ts").text("").show();
+        }
+    }
+
+</script>
+</body>
+</html>

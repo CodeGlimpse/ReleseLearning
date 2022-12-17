@@ -1,65 +1,39 @@
 package com.example.releaselearning.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.io.Serializable;
 
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "tbl_student")
-public class Student implements Serializable {
-    @JsonFormat(shape = JsonFormat.Shape.STRING)
+public class Student {
     @Id
+    @NotEmpty(message = "学号不能为空")
+    @Column(name = "student_id")
     private String studentId;
+
     @NotEmpty(message = "姓名不能为空")
+    @Column(name = "name")
     private String name;
-    @NotEmpty(message = "姓名不能为空")
-    private String classId;
-    @NotEmpty(message = "姓名不能为空")
+
+    @NotEmpty(message = "班级不能为空")
+    @ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.MERGE)
+    @JoinColumn(name = "class")
+    private Class classId;
+
+    @NotEmpty(message = "密码不能为空")
+    @Column(name = "password")
     private String password;
-
-    public String getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getClassId() {
-        return classId;
-    }
-
-    public void setClassId(String classId) {
-        this.classId = classId;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     @Override
     public String toString() {
-        return "Student{" +
-                "studentId='" + studentId + '\'' +
-                ", name='" + name + '\'' +
-                ", classId='" + classId + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+        return "Student{" + "studentId='" + studentId + '\'' + ", name='" + name + '\'' + ", classId='" + classId + '\'' + ", password='" + password + '\'' + '}';
     }
+
 }

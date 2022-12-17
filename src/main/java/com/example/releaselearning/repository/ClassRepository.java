@@ -1,12 +1,10 @@
 package com.example.releaselearning.repository;
 
-import com.example.releaselearning.entity.ClassTbl;
-import com.example.releaselearning.entity.Homework;
+import com.example.releaselearning.entity.Class;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
+@Repository
+public interface ClassRepository extends JpaRepository<Class, String> {
 
-public interface ClassRepository extends JpaRepository<ClassTbl, String>, JpaSpecificationExecutor<ClassTbl> {
-    List<ClassTbl> findByTeacherId(String teacherId);
 }
