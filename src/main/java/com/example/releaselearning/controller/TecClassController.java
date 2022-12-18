@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -25,25 +24,30 @@ public class TecClassController {
     @Autowired
     private ClassRepository classRepository;
 
-    @GetMapping("/newClass/{teacherId}")
+    @GetMapping("/newClass/{teacherId}/{name}")
     public String getNewClassPage(Map<String,Object> map, @PathVariable
-            String teacherId){
-        return postNewClassPage(map, teacherId);
+            String teacherId,@PathVariable String name){
+        return postNewClassPage(map, teacherId, name);
     }
-    @PostMapping("/newClass/{teacherId}")
+    @PostMapping("/newClass/{teacherId}/{name}")
     public String postNewClassPage(Map<String,Object> map, @PathVariable
-            String teacherId){
+            String teacherId,@PathVariable String name){
         //创建班级页面
-
+        map.put("teacher_id", teacherId);
+        map.put("name",name);
         return "newClass";
     }
 
-    @PostMapping("/createClass")
-    public ModelAndView createClass() {
+    @PostMapping("/createClass/{teacherId}")
+    public ModelAndView createClass(@PathVariable String teacherId,String classId) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/register");
+        modelAndView.setViewName("redirect:/tec/index/" + teacherId);
         //创建班级返回函数
-
+        Optional<Teacher> teacher= teacherRepository.findById(teacherId);
+        Class newClass = new Class();
+        newClass.setClassId(classId);
+        newClass.setTeacherId(teacher.get());
+        classRepository.save(newClass);
         return modelAndView;
     }
 
@@ -55,22 +59,13 @@ public class TecClassController {
     @PostMapping("/classList/{teacherId}")
     public String postClassListPage(Map<String,Object> map, @PathVariable
             String teacherId){
-        //班级列表页面
-        //遍历数据库班级表，寻找techer_id符合要求的班级列表
-        List<Class> classes= classRepository.findAll();
-        System.out.println(classes);
-        List<Class> classesYes = new ArrayList<>();
-        for(Class cla : classes){
-            if(cla.getTeacherId().getTeacherId().equals(teacherId)){
-                classesYes.add(cla);
-            }
-            //传递数据
-            map.put("classesYes", classesYes);
-            map.put("teacherId", teacherId);
+        //班级列表页面，查询该老师所管辖的所有班级
+        List<Class> classes = classRepository.findClassByTeacherId(teacherId);
+        Optional<Teacher> teacher= teacherRepository.findById(teacherId);
+        map.put("teacherName",teacher.get().getName());
+        if(classes!=null){
+            map.put("classList",classes);
         }
-        System.out.println(map.get(classesYes));
-
-        //返回页面classList.html
         return "classList";
     }
 

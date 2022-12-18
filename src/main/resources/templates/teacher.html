@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>教师端</title>
 </head>
 <body>
-<p th:text="'姓名:'+${name}">姓名：null</p>
-<p th:text="'教工号:'+${teacher_id}">教工号:null</p>
-<a th:href="@{tec/newClass}">创建班级</a><br>
-<a th:href="@{'/tec/classList/' + ${teacher_id}}">班级列表</a><br>
+<p th:text="'姓名:'+${name}"></p>
+<p th:text="'教工号:'+${teacher_id}"></p>
+<a th:href="@{'http://localhost:8080/tec/newClass/'+${teacher_id}+'/'+${name}}">创建班级</a><br>
+<a th:href="@{'http://localhost:8080/tec/classList/'+${teacher_id}}">班级列表</a><br>
 </body>
 </html>
