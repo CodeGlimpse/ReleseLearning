@@ -5,17 +5,16 @@
     <title>创建班级</title>
 </head>
 <body>
-    <!--李冰玉-->
-    <div style="text-align: center">
-        <h1 th:text="${name}+'老师，您好'" style="background-color: cornflowerblue;width: auto"></h1>
-        <form th:action="@{'http://localhost:8080/tec/createClass/'+${teacher_id}}" th:method="post">
-            <label>
-                班级号：
-                <input name="classId" type="text"/>
-            </label><br>
-            <h1></h1>
-            <input type="submit" value="创建">
-        </form>
-    </div>
+<div style="text-align: center">
+    <h1 style="background-color: cornflowerblue;width: auto" th:text="${teacherName}+'老师，您好'">null老师，您好</h1>
+    <form th:action="@{/tec/createClass}" th:method="post">
+        <label>
+            班级号：
+            <input name="teacherId" type="text" value="${teacherId}">
+            <input name="classId" type="text"/>
+        </label><br>
+        <input type="submit" value="创建">
+    </form>
+</div>
 </body>
 </html>

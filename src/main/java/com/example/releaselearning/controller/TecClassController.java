@@ -28,74 +28,77 @@ public class TecClassController {
     @Autowired
     private StudentRepository studentRepository;
 
-    @GetMapping("/newClass/{teacherId}/{name}")
-    public String getNewClassPage(Map<String,Object> map, @PathVariable
-            String teacherId,@PathVariable String name){
-        return postNewClassPage(map, teacherId, name);
+    @GetMapping("/newClass/{teacherId}")
+    public String getNewClassPage(Map<String, Object> map, @PathVariable String teacherId) {
+        return postNewClassPage(map, teacherId);
     }
-    @PostMapping("/newClass/{teacherId}/{name}")
-    public String postNewClassPage(Map<String,Object> map, @PathVariable
-            String teacherId,@PathVariable String name){
+
+    @PostMapping("/newClass/{teacherId}")
+    public String postNewClassPage(Map<String, Object> map, @PathVariable String teacherId) {
         //创建班级页面
-        map.put("teacher_id", teacherId);
-        map.put("name",name);
+        Optional<Teacher> user = teacherRepository.findById(teacherId);
+        if (user.isPresent()) {
+            map.put("teacherId", teacherId);
+            map.put("teacherName", user.get().getName());
+        }
         return "newClass";
     }
 
     @PostMapping("/createClass/{teacherId}")
-    public ModelAndView createClass(@PathVariable String teacherId,String classId) {
+    public ModelAndView createClass(String teacherId, String classId) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/tec/index/" + teacherId);
+        modelAndView.setViewName("redirect:/tec/newClass/" + teacherId);
         //创建班级返回函数
-        Optional<Teacher> teacher= teacherRepository.findById(teacherId);
-        Class newClass = new Class();
-        newClass.setClassId(classId);
-        newClass.setTeacherId(teacher.get());
-        classRepository.save(newClass);
+        Optional<Teacher> teacher = teacherRepository.findById(teacherId);
+        Optional<Class> tmp = classRepository.findById(classId);
+        if (!tmp.isPresent() && teacher.isPresent()) {
+            Class newClass = new Class();
+            newClass.setClassId(classId);
+            newClass.setTeacherId(teacher.get());
+            classRepository.save(newClass);
+            modelAndView.setViewName("redirect:/tec/index/" + teacherId);
+        }
         return modelAndView;
     }
 
     @GetMapping("/classList/{teacherId}")
-    public String getClassListPage(Map<String,Object> map, @PathVariable
-            String teacherId){
+    public String getClassListPage(Map<String, Object> map, @PathVariable String teacherId) {
         return postClassListPage(map, teacherId);
     }
+
     @PostMapping("/classList/{teacherId}")
-    public String postClassListPage(Map<String,Object> map, @PathVariable
-            String teacherId){
+    public String postClassListPage(Map<String, Object> map, @PathVariable String teacherId) {
         //班级列表页面，查询该老师所管辖的所有班级
         List<Class> classes = classRepository.findClassByTeacherId(teacherId);
-        Optional<Teacher> teacher= teacherRepository.findById(teacherId);
-        map.put("teacherName",teacher.get().getName());
-        if(classes!=null){
-            map.put("classList",classes);
+        Optional<Teacher> teacher = teacherRepository.findById(teacherId);
+        teacher.ifPresent(value -> map.put("teacherName", value.getName()));
+        if (classes != null) {
+            map.put("classes", classes);
         }
         return "classList";
     }
 
     @GetMapping("/classDetail/{classId}")
-    public String getClassDetailPage(Map<String,Object> map, @PathVariable
-            String classId){
-        System.out.println("1111111111111111111111111111111111111111");
+    public String getClassDetailPage(Map<String, Object> map, @PathVariable String classId) {
         return postClassDetailPage(map, classId);
     }
+
     @PostMapping("/classDetail/{classId}")
-    public String postClassDetailPage(Map<String,Object> map, @PathVariable
-            String classId) {
-        System.out.println("22222222222222222222222222222222222");
+    public String postClassDetailPage(Map<String, Object> map, @PathVariable String classId) {
         //班级详情页面
         Optional<Class> cla = classRepository.findById(classId);
         List<Student> stus = null;
         if (cla.isPresent()) {
             stus = studentRepository.findStudentByClassId(cla.get());
         }
-        System.out.println(stus);
+
+        System.out.println(stus);//test
+
         if (stus != null) {
-            map.put("stuList", stus);
+            map.put("students", stus);
         }
         map.put("classId", classId);
-        System.out.println(map.get("stuList"));
-        System.out.println(map.get("classId"));
+
         return "classDetail";
     }
 }

@@ -6,23 +6,18 @@
 </head>
 <body>
 <div style="text-align: center">
-    <h1 th:text="${teacherName}+'老师，您好'" style="background-color: cornflowerblue;width: auto"></h1>
-    <table border="1" align="center">
-        <thead>
+    <h1 style="background-color: cornflowerblue;width: auto" th:text="${teacherName}+'老师，您好'"></h1>
+    <table align="center" border="1">
         <tr>
             <th>班级号</th>
-            <th>老师姓名</th>
             <th>操作</th>
         </tr>
-        </thead>
-        <tbody>
-        <!-- 遍历集合，如果被遍历的变量 classList 为 null 或者不存在，则不会进行遍历，也不报错-->
-        <tr th:each="classTbl : ${classList}">
-            <td th:text="${classTbl.getClassId()}"></td>
-            <td th:text="${teacherName}"></td>
-            <td><a th:href="@{'/tec/classDetail/'+${classTbl.getClassId()}}">查看详情</a></td>
+
+        <!-- 遍历集合，如果被遍历的变量 classes 为 null 或者不存在，则不会进行遍历，也不报错-->
+        <tr th:each="class : ${classes}">
+            <td th:text="${class.classId()}"></td>
+            <td><a th:href="@{/tec/classDetail/{id}(id = ${class.classId()})}">查看详情</a></td>
         </tr>
-        </tbody>
     </table>
 </div>
 
