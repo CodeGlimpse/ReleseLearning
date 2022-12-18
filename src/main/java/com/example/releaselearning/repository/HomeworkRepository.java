@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 public interface HomeworkRepository extends JpaRepository<Homework, String> {
-
+    List<Homework> findHomeworkByStudentAndExam(Student student,int exam);
     List<Homework> findByStudent(Student student);
 }
