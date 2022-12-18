@@ -35,7 +35,7 @@ public class TecHomeworkController {
 
     //作业列表界面
     @GetMapping("/homework/{classId}/{exam}")
-    public String getHomeworkPage(Map<String,Object> map, @PathVariable
+   /* public String getHomeworkPage(Map<String,Object> map, @PathVariable
             String classId,@PathVariable int exam){
         //通过classid获得老师id
         Teacher teacher=classRepository.findByClassId(classId).getTeacherId();
@@ -53,7 +53,7 @@ public class TecHomeworkController {
         map.put("exam",exam);
         map.put("teacherName",teacherRepository.findByTeacherId(teacher.getTeacherId()).getName());
         return "teacher_homework";
-    }
+    }*/
     @PostMapping("/homework/{classId}")
     public String postHomeworkPage(Map<String,Object> map, @PathVariable
             String classId){

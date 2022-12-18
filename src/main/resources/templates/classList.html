@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>班级列表</title>
+    <meta charset="UTF-8">
+    <title>教师端班级列表</title>
 </head>
 <body>
-      <table>
-          <thead>
-          <tr>
-              <td>序号</td>
-              <td>班级</td>
-              <td>教师</td>
-          </tr>
-          </thead>
-          <tbody>
-          <tr th:each="cla, clas : ${classesYes}">
-              <td th:text="${clas.index}"></td>
-              <td th:text="${cla.classId}"></td>
-              <td th:text="${teacherId}"></td>
-          </tr>
-          </tbody>
+<div style="text-align: center">
+    <h1 th:text="${teacherName}+'老师，您好'" style="background-color: cornflowerblue;width: auto"></h1>
+    <table border="1" align="center">
+        <thead>
+        <tr>
+            <th>班级号</th>
+            <th>老师姓名</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- 遍历集合，如果被遍历的变量 classList 为 null 或者不存在，则不会进行遍历，也不报错-->
+        <tr th:each="classTbl : ${classList}">
+            <td th:text="${classTbl.getClassId()}"></td>
+            <td th:text="${teacherName}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
-
-      </table>
 </body>
-
 </html>
