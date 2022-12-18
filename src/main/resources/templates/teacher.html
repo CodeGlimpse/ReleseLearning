@@ -8,6 +8,6 @@
 <p th:text="'姓名:'+${name}">姓名：null</p>
 <p th:text="'教工号:'+${teacher_id}">教工号:null</p>
 <a th:href="@{tec/newClass}">创建班级</a><br>
-<a th:href="@{tec/classList}">班级列表</a><br>
+<a th:href="@{'/tec/classList/' + ${teacher_id}}">班级列表</a><br>
 </body>
 </html>

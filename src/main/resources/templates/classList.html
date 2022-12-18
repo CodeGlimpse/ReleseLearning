@@ -5,6 +5,24 @@
   <title>班级列表</title>
 </head>
 <body>
+      <table>
+          <thead>
+          <tr>
+              <td>序号</td>
+              <td>班级</td>
+              <td>教师</td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="cla, clas : ${classesYes}">
+              <td th:text="${clas.index}"></td>
+              <td th:text="${cla.classId}"></td>
+              <td th:text="${teacherId}"></td>
+          </tr>
+          </tbody>
 
+
+      </table>
 </body>
+
 </html>

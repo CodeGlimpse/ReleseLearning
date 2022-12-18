@@ -1,5 +1,7 @@
 package com.example.releaselearning.controller;
 
+import com.example.releaselearning.entity.Class;
+import com.example.releaselearning.entity.Teacher;
 import com.example.releaselearning.repository.ClassRepository;
 import com.example.releaselearning.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/tec")
@@ -51,7 +56,21 @@ public class TecClassController {
     public String postClassListPage(Map<String,Object> map, @PathVariable
             String teacherId){
         //班级列表页面
+        //遍历数据库班级表，寻找techer_id符合要求的班级列表
+        List<Class> classes= classRepository.findAll();
+        System.out.println(classes);
+        List<Class> classesYes = new ArrayList<>();
+        for(Class cla : classes){
+            if(cla.getTeacherId().getTeacherId().equals(teacherId)){
+                classesYes.add(cla);
+            }
+            //传递数据
+            map.put("classesYes", classesYes);
+            map.put("teacherId", teacherId);
+        }
+        System.out.println(map.get(classesYes));
 
+        //返回页面classList.html
         return "classList";
     }
 
