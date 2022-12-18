@@ -58,6 +58,7 @@ public class TecHomeworkController {
     public String postHomeworkPage(Map<String,Object> map, @PathVariable
             String classId){
         //作业界面
+        System.out.println("000000000000000000000");
         return "tecHomework";
     }
 }

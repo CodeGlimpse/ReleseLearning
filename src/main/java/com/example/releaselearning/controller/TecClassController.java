@@ -1,8 +1,10 @@
 package com.example.releaselearning.controller;
 
 import com.example.releaselearning.entity.Class;
+import com.example.releaselearning.entity.Student;
 import com.example.releaselearning.entity.Teacher;
 import com.example.releaselearning.repository.ClassRepository;
+import com.example.releaselearning.repository.StudentRepository;
 import com.example.releaselearning.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,8 @@ public class TecClassController {
     private TeacherRepository teacherRepository;
     @Autowired
     private ClassRepository classRepository;
+    @Autowired
+    private StudentRepository studentRepository;
 
     @GetMapping("/newClass/{teacherId}/{name}")
     public String getNewClassPage(Map<String,Object> map, @PathVariable
@@ -72,13 +76,26 @@ public class TecClassController {
     @GetMapping("/classDetail/{classId}")
     public String getClassDetailPage(Map<String,Object> map, @PathVariable
             String classId){
-        return postClassDetailPage(map,classId);
+        System.out.println("1111111111111111111111111111111111111111");
+        return postClassDetailPage(map, classId);
     }
     @PostMapping("/classDetail/{classId}")
     public String postClassDetailPage(Map<String,Object> map, @PathVariable
-            String classId){
+            String classId) {
+        System.out.println("22222222222222222222222222222222222");
         //班级详情页面
-
+        Optional<Class> cla = classRepository.findById(classId);
+        List<Student> stus = null;
+        if (cla.isPresent()) {
+            stus = studentRepository.findStudentByClassId(cla.get());
+        }
+        System.out.println(stus);
+        if (stus != null) {
+            map.put("stuList", stus);
+        }
+        map.put("classId", classId);
+        System.out.println(map.get("stuList"));
+        System.out.println(map.get("classId"));
         return "classDetail";
     }
 }

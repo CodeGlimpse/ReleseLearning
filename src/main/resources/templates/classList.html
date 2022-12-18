@@ -12,6 +12,7 @@
         <tr>
             <th>班级号</th>
             <th>老师姓名</th>
+            <th>操作</th>
         </tr>
         </thead>
         <tbody>
@@ -19,6 +20,7 @@
         <tr th:each="classTbl : ${classList}">
             <td th:text="${classTbl.getClassId()}"></td>
             <td th:text="${teacherName}"></td>
+            <td><a th:href="@{'/tec/classDetail/'+${classTbl.getClassId()}}">查看详情</a></td>
         </tr>
         </tbody>
     </table>
