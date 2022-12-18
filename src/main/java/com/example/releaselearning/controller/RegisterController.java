@@ -32,6 +32,7 @@ public class RegisterController {
     public String getCreateRegisterPage() {
         return "register";
     }
+
     @PostMapping("/register")
     public String postCreateRegisterPage() {
         return "register";
@@ -51,10 +52,12 @@ public class RegisterController {
             stu.setName(name);
             stu.setPassword(password);
             Optional<Class> class_id = classRepository.findById(classId);
-            stu.setClassId(class_id.get());
-            studentRepository.save(stu);
-            modelAndView.setViewName("redirect:/login");
-            return modelAndView;
+            if (class_id.isPresent()) {
+                stu.setClassId(class_id.get());
+                studentRepository.save(stu);
+                modelAndView.setViewName("redirect:/login");
+                return modelAndView;
+            }
         }
 
         return modelAndView;

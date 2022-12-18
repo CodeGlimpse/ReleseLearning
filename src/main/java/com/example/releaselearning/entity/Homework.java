@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Builder
 @AllArgsConstructor
@@ -31,7 +32,7 @@ public class Homework {
     @Column(name = "homework_content")
     private String homeworkContent;
 
-    @NotEmpty(message = "所属学生不能为空")
+    @NotNull(message = "所属学生不能为空")
     @ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.MERGE)
     @JoinColumn(name = "student")
     private Student student;

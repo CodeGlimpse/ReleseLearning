@@ -28,12 +28,14 @@ public class StuIndexController {
             String studentId){
         //通过student_id得到学生的个人信息
         Optional<Student> student= studentRepository.findById(studentId);
-        //将得到的所有信息输入到map
-        String name=student.get().getName();
-        String class_id =student.get().getClassId().getClassId();
-        map.put("name",name);
-        map.put("student_id",studentId);
-        map.put("class", class_id);
+        if (student.isPresent()){
+            //将得到的所有信息输入到map
+            String name=student.get().getName();
+            String class_id =student.get().getClassId().getClassId();
+            map.put("name",name);
+            map.put("student_id",studentId);
+            map.put("class", class_id);
+        }
         //返回页面student.html
         return "student";
     }
