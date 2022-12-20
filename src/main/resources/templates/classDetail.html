@@ -3,8 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <title>班级详情</title>
+    <style>
+        .bigBox {
+            margin: 0 auto;
+            width: 600px;
+            height: 400px;
+            border: 1px solid #F00;
+        }
+
+        .left {
+            display: inline-block;
+            float: left;
+            width: 19%;
+            height: 100%;
+            border: 1px solid #009A61;
+        }
+
+        .right {
+            display: inline-block;
+            float: right;
+            width: 80%;
+            height: 100%;
+            border: 1px solid #009A61;
+        }
+    </style>
 </head>
 <body>
+<div class="bigBox">
+    <div class="left">
+        <a th:href="@{../homework/{id}(id=${classId})}">作业</a>
+        <a th:href="@{../exam/{id}(id=${classId})}">考试</a>
+        <input type="button" value="聊天室"><br>
+    </div>
+    <div class="right">
+        <table align="center" border="1">
+            <thead>
+            <tr>
+                <th>序号</th>
+                <th>学生姓名</th>
+                <th colspan="2">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- 遍历集合，如果被遍历的变量 students 为 null 或者不存在，则不会进行遍历，也不报错-->
+            <tr th:each="student : ${students}">
+                <td th:text="${student.studentId}">null</td>
+                <td th:text="${student.name}">null</td>
+                <td><a th:href="@{'/stu'}">查看信息</a></td>
+                <td><a th:href="@{'/stu'}">删除</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 </body>
 </html>

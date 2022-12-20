@@ -15,6 +15,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "tbl_class")
 public class Class {
 
+    @NotEmpty(message = "班级id为空")
     @Id
     @Column(name = "class_id")
     private String classId;
