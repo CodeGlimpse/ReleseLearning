@@ -7,7 +7,7 @@
 <body>
 <p th:text="'姓名:'+${name}"></p>
 <p th:text="'教工号:'+${teacher_id}"></p>
-<a th:href="@{'http://localhost:8080/tec/newClass/'+${teacher_id}+'/'+${name}}">创建班级</a><br>
+<a th:href="@{'http://localhost:8080/tec/newClass/'+${teacher_id}}">创建班级</a><br>
 <a th:href="@{'http://localhost:8080/tec/classList/'+${teacher_id}}">班级列表</a><br>
 </body>
 </html>

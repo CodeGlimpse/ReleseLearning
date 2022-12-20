@@ -31,8 +31,8 @@
 <body>
 <div class="bigBox">
     <div class="left">
-        <input type="button" value="作业"><br>
-        <input type="button" value="考试"><br>
+        <a th:href="@{../homework/{id}(id=${classId})}">作业</a>
+        <a th:href="@{../exam/{id}(id=${classId})}">考试</a>
         <input type="button" value="聊天室"><br>
     </div>
     <div class="right">

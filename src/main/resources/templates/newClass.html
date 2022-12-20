@@ -10,7 +10,7 @@
     <form th:action="@{/tec/createClass}" th:method="post">
         <label>
             班级号：
-            <input name="teacherId" type="text" value="${teacherId}">
+            <input name="teacherId" type="text" th:value="${teacherId}" style="display: none"/>
             <input name="classId" type="text"/>
         </label><br>
         <input type="submit" value="创建">

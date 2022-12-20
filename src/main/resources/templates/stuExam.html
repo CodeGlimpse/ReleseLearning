@@ -2,26 +2,22 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>登录</title>
+    <title>学生考试</title>
 </head>
 <body>
 <p th:text="'姓名：'+${student.getName()}"></p>
-<p th:text="'学号'+${student.getStudentId()}"></p>
+<p th:text="'学号：'+${student.getStudentId()}"></p>
 <p th:text="'班级：'+${student.getClassId().getClassId()}"></p>
 <table border="1" align="center">
     <thead>
     <tr>
         <th>标题</th>
-        <th>考试开始时间</th>
-        <th>考试开始结束</th>
         <th>进入考试</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="classTbl : ${allTest}">
-        <td th:text="${classTbl.getTestId}"></td>
-        <td th:text="${classTbl.getTestBeginTime}"></td>
-        <td th:text="${classTbl.getTestEndTime}"></td>
+    <tr th:each="classTbl : ${allExam}">
+        <td th:text="${classTbl.getExamId().getExamId()}"></td>
         <td ><a href="enter.html">进入考试</a></td>
     </tr>
     </tbody>

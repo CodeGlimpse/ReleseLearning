@@ -2,12 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>教师作业</title>
+    <title>教师考试</title>
 </head>
 <body>
 <p th:text="${cla.getTeacherId().getTeacherId()}+'老师'"></p>
 <p th:text="'班级：'+${cla.getClassId()}"></p>
-<a th:href="@{tec/newHomework}">新建作业</a>
+<a th:href="@{tec/newExam}">新建考试</a>
 <table border="1" align="center">
     <thead>
     <tr>
@@ -16,9 +16,9 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="classTbl : ${homeworkList}">
-        <td th:text="${classTbl.getHomeworkId()}"></td>
-        <td><a th:href="@{tec/homework/detail/{id}(id=${classTbl.getHomeworkId()})}">详情</a></td>
+    <tr th:each="classTbl : ${examList}">
+        <td th:text="${classTbl.getExamId()}"></td>
+        <td><a th:href="@{tec/exam/detail/{id}(id=${classTbl.getExamId()})}">详情</a></td>
     </tr>
     </tbody>
 </table>

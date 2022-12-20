@@ -2,28 +2,26 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>登录</title>
+    <title>学生作业</title>
 </head>
 <body>
 <p th:text="'姓名：'+${student.getName()}"></p>
-<p th:text="'学号'+${student.getStudentId()}"></p>
+<p th:text="'学号：'+${student.getStudentId()}"></p>
 <p th:text="'班级：'+${student.getClassId().getClassId()}"></p>
 <table border="1" align="center">
     <thead>
     <tr>
         <th>标题</th>
-        <th>作业开始时间</th>
-        <th>作业开始结束</th>
         <th>是否完成</th>
+        <th>分数</th>
         <th>进入作业</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="classTbl : ${allHomework}">
-        <td th:text="${classTbl.getHomeworkId}"></td>
-        <td th:text="${classTbl.getHomeworkBeginTime}"></td>
-        <td th:text="${classTbl.getHomeworkEndTime}"></td>
-        <td th:text="${classTbl.getStatus}"></td>
+        <td th:text="${classTbl.getHomeworkId().getHomeworkId()}"></td>
+        <td th:text="${classTbl.getHomeworkFile}"></td>
+        <td th:text="${classTbl.getHomeworkScore}"></td>
         <td ><a href="enter.html">查看作业</a></td>
     </tr>
     </tbody>

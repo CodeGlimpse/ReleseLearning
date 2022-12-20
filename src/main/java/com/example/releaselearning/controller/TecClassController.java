@@ -44,7 +44,7 @@ public class TecClassController {
         return "newClass";
     }
 
-    @PostMapping("/createClass/{teacherId}")
+    @PostMapping("/createClass")
     public ModelAndView createClass(String teacherId, String classId) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/tec/newClass/" + teacherId);

@@ -3,12 +3,10 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/releaseLearning?useUnicode=true&characterEncoding=UTF-8
     username: root
-    password: 123456
+    password: 0613lbc0613
   jpa:
     database: MYSQL
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show-sql: true
-  thymeleaf:
-    mode: LEGACYHTML5
