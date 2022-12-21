@@ -24,13 +24,10 @@ public class login {
 
         Optional<Student> student = studentRepository.findById(studentId);
 
-        if (student.isPresent()) {
-            System.out.println(student);//test
-
-            if (student.get().getPassword().equals(studentPwd)) {
-                return "true";
-            }
+        if (student.isPresent() && student.get().getPassword().equals(studentPwd)) {
+            return "true";
         }
+
         return "false";
     }
 }
