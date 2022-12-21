@@ -29,7 +29,8 @@ public class Exam {
     @JoinColumn(name = "class_id")
     private Class classId;
 
-    @NotEmpty(message = "考试状态不能为空")
+//    @NotEmpty(message = "考试状态不能为空")
     @Column(name = "status")
     private int status;
+
 }

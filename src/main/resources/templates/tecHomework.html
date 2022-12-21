@@ -7,7 +7,7 @@
 <body>
 <p th:text="${cla.getTeacherId().getTeacherId()}+'老师'"></p>
 <p th:text="'班级：'+${cla.getClassId()}"></p>
-<a th:href="@{tec/newHomework}">新建作业</a>
+<a th:href="@{/tec/homework/addPage/{teacher_id}/{class_id}/(teacher_id=${cla.getTeacherId().getTeacherId()},class_id=${cla.getClassId()})}">新建作业</a>
 <table border="1" align="center">
     <thead>
     <tr>

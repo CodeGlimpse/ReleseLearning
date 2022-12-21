@@ -1,8 +1,6 @@
 package com.example.releaselearning.controller;
 
-import com.example.releaselearning.entity.Homework;
-import com.example.releaselearning.entity.Student;
-import com.example.releaselearning.entity.Teacher;
+import com.example.releaselearning.entity.*;
 import com.example.releaselearning.entity.Class;
 import com.example.releaselearning.repository.ClassRepository;
 import com.example.releaselearning.repository.HomeworkRepository;
@@ -49,4 +47,28 @@ public class TecHomeworkController {
         map.put("homeworkList", homeworkList);
         return "tecHomework";
     }
+
+    @GetMapping("/homework/addPage/{teacher_id}/{class_id}")
+    public String getAddHomeworkPage(Map<String,Object> map, @PathVariable
+    String teacher_id , @PathVariable String class_id){
+        return postAddHomeworkPage(map,teacher_id , class_id);
+    }
+    @PostMapping("/homework/addPage/{teacher_id}/{class_id}")
+    public String postAddHomeworkPage(Map<String,Object> map, @PathVariable
+    String teacher_id ,@PathVariable String class_id) {
+
+        return "tecAddHomework";
+    }
+    @PostMapping("/homework/add/{teacher_id}/{class_id}")
+    public String postAddExam(Map<String,Object> map,@PathVariable String teacher_id,@PathVariable String class_id , String homeworkId , String homeworkContent){
+        System.out.println(class_id+" " +homeworkId +" " +homeworkContent);
+        Optional<Class> clas =  classRepository.findById(class_id);
+        Homework homework = null;
+        if(clas.isPresent())homework = new Homework(homeworkId , homeworkContent , clas.get());
+        if(homework !=null){
+            Homework save = homeworkRepository.save(homework);
+        }
+        return "tecAddHomework";
+    }
+
 }

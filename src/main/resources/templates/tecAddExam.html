@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>老师添加考试页面</title>
+</head>
+<body>
+<form th:action="@{/tec/exam/add/{teacher_id}/{class_id}/(teacher_id=${teacher_id},class_id=${class_id})}" th:method="post">
+<!--<form>-->
+    <label>
+        考试名称：
+        <input name="examId" type="text"/>
+    </label><br>
+    <label>
+        考试内容：
+        <textarea name="examContent" rows="10" cols="20" ></textarea>
+    </label><br>
+    <input type="submit" value="提交">
+</form>
+</body>
+</html>

@@ -39,7 +39,7 @@
         <table align="center" border="1">
             <thead>
             <tr>
-                <th>序号</th>
+                <th>学号</th>
                 <th>学生姓名</th>
                 <th colspan="2">操作</th>
             </tr>
@@ -49,8 +49,8 @@
             <tr th:each="student : ${students}">
                 <td th:text="${student.studentId}">null</td>
                 <td th:text="${student.name}">null</td>
-                <td><a th:href="@{'/stu'}">查看信息</a></td>
-                <td><a th:href="@{'/stu'}">删除</a></td>
+                <td><a th:href="@{'/stu'}">修改密码</a></td>
+                <td><a th:href="@{/tec/detele/{classId}/{studentId}/(classId=${classId},studentId=${student.studentId})}">删除</a></td>
             </tr>
             </tbody>
         </table>

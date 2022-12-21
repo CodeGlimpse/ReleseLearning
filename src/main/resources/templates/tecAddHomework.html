@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>老师添加作业页面</title>
+</head>
+<body>
+<form th:action="@{/tec/homework/add/{teacher_id}/{class_id}/(teacher_id=${teacher_id},class_id=${class_id})}" th:method="post">
+    <!--<form>-->
+    <label>
+        作业名称：
+        <input name="homeworkId" type="text"/>
+    </label><br>
+    <label>
+        作业内容：
+        <textarea name="homeworkContent" rows="10" cols="20" ></textarea>
+    </label><br>
+    <input type="submit" value="提交">
+</form>
+</body>
+</html>

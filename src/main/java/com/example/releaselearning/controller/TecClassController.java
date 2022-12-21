@@ -101,4 +101,25 @@ public class TecClassController {
 
         return "classDetail";
     }
+
+    @GetMapping("/detele/{classId}/{studentId}")
+    public String getDeteleStudent(Map<String, Object> map, @PathVariable String classId,@PathVariable String studentId) {
+        return postDeteleStudent(map, classId,studentId);
+    }
+
+    @PostMapping("/detele/{classId}/{studentId}")
+    public String postDeteleStudent(Map<String, Object> map,@PathVariable String classId, @PathVariable String studentId) {
+        System.out.println(studentId);
+        studentRepository.deleteById(studentId);
+        Optional<Class> clas =  classRepository.findById(classId);
+        List<Student> students = null;
+        if(clas.isPresent())students = studentRepository.findStudentByClassId(clas.get());
+
+        if(students!=null){
+            map.put("students", students);
+        }
+        return "classDetail";
+    }
+
+
 }

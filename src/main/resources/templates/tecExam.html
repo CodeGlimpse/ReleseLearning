@@ -7,11 +7,13 @@
 <body>
 <p th:text="${cla.getTeacherId().getTeacherId()}+'老师'"></p>
 <p th:text="'班级：'+${cla.getClassId()}"></p>
-<a th:href="@{tec/newExam}">新建考试</a>
+<a th:href="@{/tec/exam/addPage/{teacher_id}/{class_id}/(teacher_id=${cla.getTeacherId().getTeacherId()},class_id=${cla.getClassId()})}">新建考试</a>
+
 <table border="1" align="center">
     <thead>
     <tr>
         <th>标题</th>
+
         <th>详情</th>
     </tr>
     </thead>
