@@ -20,8 +20,8 @@
     <tbody>
     <tr th:each="classTbl : ${allHomework}">
         <td th:text="${classTbl.getHomeworkId().getHomeworkId()}"></td>
-        <td th:text="${classTbl.getHomeworkFile}"></td>
-        <td th:text="${classTbl.getHomeworkScore}"></td>
+        <td th:text="${classTbl.getHomeworkStatus()}"></td>
+        <td th:text="${classTbl.getHomeworkScore()}"></td>
         <td ><a href="enter.html">查看作业</a></td>
     </tr>
     </tbody>

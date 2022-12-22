@@ -21,12 +21,12 @@ public class ExamDetail {
     private int id;
 
     @ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.MERGE)
-    @NotEmpty(message = "考试外键不能为空")
+    @NotNull(message = "考试外键不能为空")
     @JoinColumn(name = "exam_id")
     private Exam examId;
 
     @ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.MERGE)
-    @NotEmpty(message = "所属学生不能为空")
+    @NotNull(message = "所属学生不能为空")
     @JoinColumn(name = "student_id")
     private Student studentId;
 
@@ -34,7 +34,7 @@ public class ExamDetail {
     @Column(name = "exam_file")
     private String examFile;
 
-    @NotEmpty(message = "分数不能为空")
+    @NotNull(message = "分数不能为空")
     @Column(name = "exam_score")
     private int examScore;
 }

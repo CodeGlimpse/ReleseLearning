@@ -6,7 +6,7 @@
 </head>
 <body>
 <p th:text="'姓名：'+${name}"></p>
-<p th:text="'学号'+${student_id}"></p>
+<p th:text="'学号：'+${student_id}"></p>
 <p th:text="'班级：'+${class}"></p>
 <a href="student.html">班级群</a><br>
 <a th:href="@{/stu/exam/{studentId}(studentId=${studentId})}">考试界面</a><br>

@@ -12,12 +12,14 @@
     <thead>
     <tr>
         <th>标题</th>
+        <th>考试状态</th>
         <th>进入考试</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="classTbl : ${allExam}">
         <td th:text="${classTbl.getExamId().getExamId()}"></td>
+        <td th:text="${classTbl.getExamId().getStatus()}"></td>
         <td ><a href="enter.html">进入考试</a></td>
     </tr>
     </tbody>
