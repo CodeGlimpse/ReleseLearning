@@ -5,9 +5,9 @@
     <title>学生作业</title>
 </head>
 <body>
-<p th:text="'姓名：'+${student.getName()}"></p>
-<p th:text="'学号：'+${student.getStudentId()}"></p>
-<p th:text="'班级：'+${student.getClassId().getClassId()}"></p>
+<p th:text="'姓名：'+${student.name}"></p>
+<p th:text="'学号：'+${student.studentId}"></p>
+<p th:text="'班级：'+${student.classId.classId}"></p>
 <table border="1" align="center">
     <thead>
     <tr>
@@ -22,7 +22,8 @@
         <td th:text="${classTbl.getHomeworkId().getHomeworkId()}"></td>
         <td th:text="${classTbl.getHomeworkStatus()}"></td>
         <td th:text="${classTbl.getHomeworkScore()}"></td>
-        <td ><a href="enter.html">查看作业</a></td>
+        <td><a th:href="@{/stu/homework/findOne/{homeworkId}/{studentId}
+            (homeworkId=${classTbl.getHomeworkId().getHomeworkId()}, studentId=${student.studentId})}">查看作业</a></td>
     </tr>
     </tbody>
 </table>
