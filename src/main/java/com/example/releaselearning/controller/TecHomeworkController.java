@@ -2,6 +2,7 @@ package com.example.releaselearning.controller;
 
 import com.example.releaselearning.entity.*;
 import com.example.releaselearning.entity.Class;
+import com.example.releaselearning.repository.*;
 import com.example.releaselearning.repository.ClassRepository;
 import com.example.releaselearning.repository.HomeworkRepository;
 import com.example.releaselearning.repository.HwDetailRepository;
@@ -14,6 +15,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.awt.*;
+import java.io.*;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -82,4 +90,105 @@ public class TecHomeworkController {
         return modelAndView;
     }
 
+    //作业详情-李冰玉
+    @GetMapping("/homework/detail/{homework_id}")
+    public String postHomeworkDetail(Map<String,Object> map,@PathVariable String homework_id){
+        Optional<Homework> homework = homeworkRepository.findById(homework_id);
+        List<HwDetail> hwDetails = null;
+        if(homework.isPresent()){
+            hwDetails = hwDetailRepository.findHwDetailsByHomeworkId(homework.get());
+            map.put("hwDetails",hwDetails);
+            map.put("homeworkId",homework_id);
+        }
+        return "tecHomeworkDetail";
+    }
+
+    //修改分数
+    @PostMapping("/homeworkScore/{id}")
+    public ModelAndView updateHomeworkScore(@PathVariable int id, String homeworkScore){
+        hwDetailRepository.updateHwDetailsById(Integer.valueOf(homeworkScore),id);
+        Optional<HwDetail> hwDetail = hwDetailRepository.findHwDetailById(id);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/tec/homework/detail/" + hwDetail.get().getHomeworkId().getHomeworkId());
+        return modelAndView;
+    }
+
+    //打开文件
+    @GetMapping("/homework/file/{id}")
+    public ModelAndView getOpenHomeworkFile(@PathVariable int id){
+        ModelAndView modelAndView = new ModelAndView();
+        Optional<HwDetail> hwDetail = hwDetailRepository.findHwDetailById(id);
+        if(hwDetail.isPresent()){
+            //测试使用的,已测试过这句话并不会新建一个文件，也并不会因为路径不存在而发生错误。
+            // txt、word文件都已经测试过可以成功创建、复制并打开
+            //File source = new File("E:\\12345.docx");
+            //实际代码为
+            File source = new File(hwDetail.get().getHomeworkFile());
+
+            //1、创建本地待接收的远程文件。
+            String path = "D:/"+ "/"+hwDetail.get().getHomeworkId().getHomeworkId() +"_" + hwDetail.get().getStudentId().getStudentId()+"_" + source.getName();
+            File f = new File(path);
+            try {
+                System.out.println(f.getAbsolutePath());
+                if(!f.exists()){
+                    f.createNewFile();
+                }
+            //2、创建本地至服务器端的远程连接
+            FileOutputStream fileOutputStream = new FileOutputStream(f);
+            byte[] pb = new byte[1024];
+
+            //测试用的代码
+            //URL url = new URL("file:///D:/libingyu.docx");
+            //实际项目代码
+            URL url = new URL(hwDetail.get().getHomeworkFile());
+
+            URLConnection urlc = url.openConnection();
+            InputStream inputStream = urlc.getInputStream();
+            //3、将服务器端文件写入输入流，从输入流中将内容写入本地文件，完成文件下载。
+            int length = -1;
+            while (true){
+                length = inputStream.read(pb);
+                if(length<0){
+                    fileOutputStream.flush();
+                    break;
+                }else {
+                    fileOutputStream.write(pb,0,length);
+                }
+            }
+            inputStream.close();
+            fileOutputStream.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            //打开文件
+            if(Desktop.isDesktopSupported()){
+                System.out.println("Desktop is supported");
+                Desktop desktop = Desktop.getDesktop();
+                //File f = new File("D:\\key.txt");
+                if(f.exists()){
+                    System.out.println("wenjianyou");
+                    try {
+                        desktop.open(f);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+            modelAndView.setViewName("redirect:/tec/homework/detail/" + hwDetail.get().getHomeworkId().getHomeworkId());
+        }else{
+            modelAndView.setViewName("redirect:/error");
+        }
+        return modelAndView;
+    }
+
+
+
 }
+
+
+
+
+
+
+
+

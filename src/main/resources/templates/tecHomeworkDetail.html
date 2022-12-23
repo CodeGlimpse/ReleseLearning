@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>作业详情页</title>
+</head>
+<body>
+<div style="text-align: center">
+    <h1 style="background-color: cornflowerblue;width: auto" th:text="'这是'+${homeworkId}+'作业的提交情况'"></h1>
+    <table align="center" border="1">
+        <tr>
+            <th>作业详情</th>
+            <th>分数</th>
+            <th>作业号</th>
+            <th>学生id</th>
+            <th>完成状态</th>
+            <th>确认</th>
+        </tr>
+
+        <!-- 遍历集合，如果被遍历的变量 classes 为 null 或者不存在，则不会进行遍历，也不报错-->
+        <tr th:each="hwDetail : ${hwDetails}">
+            <form th:action="@{/tec/homeworkScore/{id}(id=${hwDetail.getId()})}" th:method="post">
+                <td >
+                    <a th:href="@{/tec/homework/file/{id}(id=${hwDetail.getId()})}"
+                       th:text="${hwDetail.getHomeworkFile()}"></a>
+                </td>
+
+                <td th:if="${hwDetail.getHomeworkScore() != 9999 }">
+                    <input name="homeworkScore" type="text" maxlength="4" th:value="${hwDetail.getHomeworkScore()}">
+                </td>
+                <td th:if="${hwDetail.getHomeworkScore() == 9999 }">
+                    <input name="homeworkScore" type="text" maxlength="4"th:value="未评分">
+                </td>
+                <td th:text="${hwDetail.getHomeworkId().getHomeworkId()}"></td>
+                <td th:text="${hwDetail.getStudentId().getStudentId()}"></td>
+                <td th:text="${hwDetail.getHomeworkStatus()}"></td>
+                <td><input type="submit" value="确认"></td>
+            </form>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

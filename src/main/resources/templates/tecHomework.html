@@ -18,7 +18,7 @@
     <tbody>
     <tr th:each="classTbl : ${homeworkList}">
         <td th:text="${classTbl.getHomeworkId()}"></td>
-        <td><a th:href="@{tec/homework/detail/{id}(id=${classTbl.getHomeworkId()})}">详情</a></td>
+        <td><a th:href="@{/tec/homework/detail/{id}(id=${classTbl.getHomeworkId()})}">详情</a></td>
     </tr>
     </tbody>
 </table>
