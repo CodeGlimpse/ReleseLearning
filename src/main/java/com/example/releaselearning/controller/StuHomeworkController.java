@@ -80,7 +80,13 @@ public class StuHomeworkController {
     }
 
     @PostMapping("/fileUpload")
-    public String fileUpload(@RequestParam("uploadFilee") MultipartFile multipartFiles, HttpServletRequest request){
+    public ModelAndView fileUpload(@RequestParam("uploadFiles") MultipartFile multipartFiles, HttpServletRequest request){
+        String homeworkId = request.getParameter("homeworkId");
+        String studentId = request.getParameter("studentId");
+        System.out.println(homeworkId);
+        System.out.println(studentId);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/stu/homework/" + studentId);
         //文件下载
         //获取日期
         String uploadDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
@@ -107,10 +113,6 @@ public class StuHomeworkController {
         }
 
         //将fpath存储进数据库
-        String homeworkId = request.getParameter("homeworkId");
-        String studentId = request.getParameter("studentId");
-        System.out.println(homeworkId);
-        System.out.println(studentId);
         Optional<Homework> nowHomework = homeworkRepository.findById(homeworkId);
         if(nowHomework.isPresent() && fpath.length() != 0){
             Homework homework = nowHomework.get();
@@ -126,7 +128,7 @@ public class StuHomeworkController {
             }
         }
 
-        return "last";
+        return modelAndView;
 
 
     }

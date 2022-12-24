@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<p th:text="'作业序号：'+${homeworkDetail.getHomeworkId().getHomeworkId()}"></p>
+<p th:text="'作业内容：'+${homeworkContent.getHomeworkContent()}"></p>
+<p th:text="'作业分数：'+${homeworkDetail.getHomeworkScore()}"></p>
+
+<form method="post" action="/stu/fileUpload" enctype="multipart/form-data">
+  <input type="text" name="homeworkId" style="display: none" th:value="${homeworkDetail.getHomeworkId().getHomeworkId()}"><br>
+  <input type="text" name="studentId" style="display: none" th:value="${homeworkDetail.getStudentId().getStudentId()}"><br>
+  <input type="file" name="uploadFiles" value="请选择文件"><br>
+  <input type="submit" value="提交">
+</form>
+</body>
+</html>
