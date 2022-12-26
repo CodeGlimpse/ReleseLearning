@@ -73,6 +73,15 @@
             <artifactId>spring-boot-devtools</artifactId>     <!-- 启用 -->
             <optional>true</optional>
         </dependency>
+
+        <!--聊天室使用-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+
     </dependencies>
+
+
 
 </project>

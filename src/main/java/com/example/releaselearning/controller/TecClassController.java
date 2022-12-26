@@ -120,6 +120,14 @@ public class TecClassController {
         }
         return "classDetail";
     }
+    //聊天室
+    @GetMapping("/chatroom/{classId}")
+    public String ToChatroom(Map<String, Object> map, @PathVariable
+            String classId) {
+        map.put("number",1);
+        map.put("userId",classId);
 
+        return "chatroom";
+    }
 
 }

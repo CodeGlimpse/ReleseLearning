@@ -40,4 +40,12 @@ public class StuIndexController {
         return "student";
     }
 
+    //聊天室
+    @GetMapping("/chatroom/{studentId}")
+    public String ToChatroom(Map<String, Object> map, @PathVariable
+            String studentId) {
+        map.put("number",0);
+        map.put("userId",studentId);
+        return "chatroom";
+    }
 }

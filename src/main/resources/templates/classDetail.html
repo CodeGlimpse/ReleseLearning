@@ -33,7 +33,7 @@
     <div class="left">
         <a th:href="@{../homework/{id}(id=${classId})}">作业</a>
         <a th:href="@{../exam/{id}(id=${classId})}">考试</a>
-        <input type="button" value="聊天室"><br>
+        <a th:href="@{/tec/chatroom/{classId}(classId=${classId})}">班级群</a><br>
     </div>
     <div class="right">
         <table align="center" border="1">
