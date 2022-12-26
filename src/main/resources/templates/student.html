@@ -3,14 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <title>学生端</title>
+    <style>
+        *{
+            background-color: #E5F4FF;
+        }
+        .bigBox{
+            margin: 0 auto;
+            width: 600px;
+            height: 400px;
+            /*border: 1px solid #F00;*/
+            background-color: white;
+        }
+        .left{
+            width: 240px;
+            height: 280px;
+            float: left;
+            background-color: white;
+            padding-left: 40px;
+            padding-top: 120px;
+        }
+        .right{
+            width: 320px;
+            height: 400px;
+            float: right;
+            background-color: white;
+        }
+        .logo{
+            width: 210px;
+            padding-left: 90px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            background-color: white;
+        }
+        button{
+            height: 30px;
+            width: 120px;
+            border-radius: 15px;
+            background-color: #63ABED;
+            opacity: 80%;
+            font-weight: bold;
+            color: white;
+        }
+        p{
+            text-align: center;
+            line-height: 20px;
+            margin-right: 36px;
+            background-color: white;
+        }
+        a{
+            line-height: 30px;
+            background-color: white;
+        }
+    </style>
 </head>
 <body>
-<p th:text="'姓名：'+${name}"></p>
-<p th:text="'学号：'+${student_id}"></p>
-<p th:text="'班级：'+${class}"></p>
-<a th:href="@{/stu/chatroom/{studentId}(studentId=${studentId})}">班级群</a><br>
-<a th:href="@{/stu/exam/{studentId}(studentId=${studentId})}">考试界面</a><br>
-<a th:href="@{/stu/homework/{studentId}(studentId=${studentId})}">作业界面</a><br>
-
+    <div class="bigBox">
+        <div class="left">
+            <img src="/../static/img/img.png" alt="">
+        </div>
+        <div class="right">
+            <div class="logo">
+                <img width="100px" height="65px" src="/../static/img/logo.png">
+            </div>
+            <div style="background-color: white">
+                <p th:text="'姓名：'+${name}"></p>
+                <p th:text="'学号：'+${student_id}"></p>
+                <p th:text="'班级：'+${class}"></p>
+                <div style="margin-right: 50px; background-color: white">
+                    <a style="float: left; margin-top: 21px" href="student.html"><button>班级群聊</button></a><br>
+                    <a style="float: right" th:href="@{/stu/homework/{studentId}(studentId=${studentId})}"><button>作业界面</button></a><br>
+                </div><br>
+                <a th:href="@{/stu/exam/{studentId}(studentId=${studentId})}">
+                    <button style="margin-top: 15px; width: 230px; margin-left: 20px">考试界面</button></a><br>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

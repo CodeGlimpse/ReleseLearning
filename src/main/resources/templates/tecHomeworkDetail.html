@@ -3,41 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <title>作业详情页</title>
+    <style>
+        *{
+            background-color: #E5F4FF;
+        }
+        .bigBox{
+            margin: 0 auto;
+            width: 600px;
+            height: 400px;
+            /*border: 1px solid #F00;*/
+            background-color: white;
+        }
+        th{
+            border: 1px solid #63ABED;
+            text-align: center;
+            vertical-align: center;
+            padding: 5px 10px;
+            background-color: white;
+        }
+        td{
+            border: 1px solid #63ABED;
+            text-align: center;
+            vertical-align: center;
+            padding: 5px 10px;
+            background-color: white;
+        }
+        table{
+            border: 1px solid #63ABED;
+            border-collapse: collapse;
+        }
+        img{
+            background-color: white;
+            width: 100px;
+            height: 65px;
+        }
+        input{
+            width: 30px;
+        }
+        p{
+            line-height: 0px;
+        }
+    </style>
 </head>
 <body>
-<div style="text-align: center">
-    <h1 style="background-color: cornflowerblue;width: auto" th:text="'这是'+${homeworkId}+'作业的提交情况'"></h1>
-    <table align="center" border="1">
-        <tr>
-            <th>作业详情</th>
-            <th>分数</th>
-            <th>作业号</th>
-            <th>学生id</th>
-            <th>完成状态</th>
-            <th>确认</th>
-        </tr>
+    <div class="bigBox">
+        <div>
+            <div style="background-color: white; padding-top: 20px; text-align: center">
+                <img src="/../static/img/logo.png">
+            </div>
+            <div style="background-color: white; padding-left: 80px; padding-top: 10px">
+                <p style="background-color: white" th:text="'这是'+${homeworkId}+'作业的提交情况：'">这是作业的提交情况</p>
+                <table>
+                    <tr>
+                        <th>作业详情</th>
+                        <th>分数</th>
+                        <th>作业号</th>
+                        <th>学生id</th>
+                        <th>完成状态</th>
+                        <th>确认</th>
+                    </tr>
+                    <!-- 遍历集合，如果被遍历的变量 classes 为 null 或者不存在，则不会进行遍历，也不报错-->
+                    <tr th:each="hwDetail : ${hwDetails}">
+                        <form th:action="@{/tec/homeworkScore/{id}(id=${hwDetail.getId()})}" th:method="post">
+                            <td>
+                                <a th:href="@{/tec/homework/file/{id}(id=${hwDetail.getId()})}"
+                                   th:text="${hwDetail.getHomeworkFile()}"></a>
+                            </td>
 
-        <!-- 遍历集合，如果被遍历的变量 classes 为 null 或者不存在，则不会进行遍历，也不报错-->
-        <tr th:each="hwDetail : ${hwDetails}">
-            <form th:action="@{/tec/homeworkScore/{id}(id=${hwDetail.getId()})}" th:method="post">
-                <td >
-                    <a th:href="@{/tec/homework/file/{id}(id=${hwDetail.getId()})}"
-                       th:text="${hwDetail.getHomeworkFile()}"></a>
-                </td>
-
-                <td th:if="${hwDetail.getHomeworkScore() != 9999 }">
-                    <input name="homeworkScore" type="text" maxlength="4" th:value="${hwDetail.getHomeworkScore()}">
-                </td>
-                <td th:if="${hwDetail.getHomeworkScore() == 9999 }">
-                    <input name="homeworkScore" type="text" maxlength="4"th:value="未评分">
-                </td>
-                <td th:text="${hwDetail.getHomeworkId().getHomeworkId()}"></td>
-                <td th:text="${hwDetail.getStudentId().getStudentId()}"></td>
-                <td th:text="${hwDetail.getHomeworkStatus()}"></td>
-                <td><input type="submit" value="确认"></td>
-            </form>
-        </tr>
-    </table>
-</div>
+                            <td th:if="${hwDetail.getHomeworkScore() != 9999 }">
+                                <input name="homeworkScore" type="text" maxlength="4" th:value="${hwDetail.getHomeworkScore()}">
+                            </td>
+<!--                            <td th:if="${hwDetail.getHomeworkScore() == 9999 }">-->
+<!--                                <input name="homeworkScore" type="text" maxlength="4" th:value="未评分">-->
+<!--                            </td>-->
+                            <td th:text="${hwDetail.getHomeworkId().getHomeworkId()}"></td>
+                            <td th:text="${hwDetail.getStudentId().getStudentId()}"></td>
+                            <td th:text="${hwDetail.getHomeworkStatus()}"></td>
+                            <td><input style="width: 50px" type="submit" value="确认"></td>
+                        </form>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

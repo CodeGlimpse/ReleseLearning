@@ -4,58 +4,103 @@
     <meta charset="UTF-8">
     <title>班级详情</title>
     <style>
-        .bigBox {
+        *{
+            background-color: #E5F4FF;
+        }
+        .bigBox{
             margin: 0 auto;
             width: 600px;
             height: 400px;
-            border: 1px solid #F00;
+            /*border: 1px solid;*/
+            background-color: white;
         }
-
-        .left {
-            display: inline-block;
+        .left{
+            width: 275px;
+            height: 280px;
             float: left;
-            width: 19%;
-            height: 100%;
-            border: 1px solid #009A61;
+            background-color: white;
         }
-
-        .right {
-            display: inline-block;
+        .right{
+            width: 320px;
+            height: 350px;
             float: right;
-            width: 80%;
-            height: 100%;
-            border: 1px solid #009A61;
+            background-color: white;
+            margin-top: 50px;
+        }
+        .logo{
+            width: 210px;
+            padding-left: 90px;
+            padding-top: 50px;
+            padding-bottom: 20px;
+            background-color: white;
+        }
+        .text{
+            border: 1px solid #63ABED;
+            text-align: center;
+            vertical-align: center;
+            padding: 10px;
+            background-color: white;
+        }
+        .stu{
+            text-align: center;
+            background-color: white;
+        }
+        table{
+            border: 1px solid #63ABED;
+            border-collapse: collapse;
+            margin-left: 10px;
+        }
+        button{
+            height: 30px;
+            width: 120px;
+            border-radius: 15px;
+            background-color: #63ABED;
+            opacity: 80%;
+            font-weight: bold;
+            color: white;
+            margin-top: 20px;
+            margin-left: 16px;
+            margin-right: 20px;
+        }
+        a{
+            background-color: white;
         }
     </style>
 </head>
 <body>
-<div class="bigBox">
-    <div class="left">
-        <a th:href="@{../homework/{id}(id=${classId})}">作业</a>
-        <a th:href="@{../exam/{id}(id=${classId})}">考试</a>
-        <a th:href="@{/tec/chatroom/{classId}(classId=${classId})}">班级群</a><br>
+    <div class="bigBox">
+        <div class="left">
+            <div class="logo">
+                <img width="100px" height="65px" src="/../static/img/logo.png">
+            </div>
+            <div class="stu">
+                <a th:href="@{../homework/{id}(id=${classId})}"><button>作业</button></a>
+                <a th:href="@{../exam/{id}(id=${classId})}"><button>考试</button></a>
+                <a th:href=""><button>班级群聊</button></a>
+            </div>
+        </div>
+        <div class="right">
+            <div style="background-color: white">
+                <table>
+                    <thead>
+                    <tr>
+                        <th class="text">学号</th>
+                        <th class="text">学生姓名</th>
+                        <th class="text" colspan="2">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- 遍历集合，如果被遍历的变量 students 为 null 或者不存在，则不会进行遍历，也不报错-->
+                    <tr th:each="student : ${students}">
+                        <td class="text" th:text="${student.studentId}">null</td>
+                        <td class="text" th:text="${student.name}">null</td>
+                        <td class="text"><a th:href="@{'/stu'}">修改密码</a></td>
+                        <td class="text"><a th:href="@{/tec/detele/{classId}/{studentId}/(classId=${classId},studentId=${student.studentId})}">删除</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-    <div class="right">
-        <table align="center" border="1">
-            <thead>
-            <tr>
-                <th>学号</th>
-                <th>学生姓名</th>
-                <th colspan="2">操作</th>
-            </tr>
-            </thead>
-            <tbody>
-            <!-- 遍历集合，如果被遍历的变量 students 为 null 或者不存在，则不会进行遍历，也不报错-->
-            <tr th:each="student : ${students}">
-                <td th:text="${student.studentId}">null</td>
-                <td th:text="${student.name}">null</td>
-                <td><a th:href="@{'/stu'}">修改密码</a></td>
-                <td><a th:href="@{/tec/detele/{classId}/{studentId}/(classId=${classId},studentId=${student.studentId})}">删除</a></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-
 </body>
 </html>

@@ -3,19 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <title>老师添加作业页面</title>
+    <style>
+        *{
+            background-color: #E5F4FF;
+        }
+        .bigBox{
+            margin: 0 auto;
+            width: 600px;
+            height: 400px;
+            /*border: 1px solid #F00;*/
+            background-color: white;
+        }
+        img{
+            background-color: white;
+            width: 100px;
+            height: 65px;
+        }
+        .form{
+            height: 160px;
+            background-color: white;
+        }
+        .button{
+            height: 30px;
+            width: 100px;
+            border-radius: 15px;
+            background-color: #63ABED;
+            opacity: 80%;
+            font-weight: bold;
+            color: white;
+            margin-left: 350px;
+            margin-top: 20px;
+        }
+        input{
+            background-color: white;
+        }
+    </style>
 </head>
 <body>
-<form th:action="@{/tec/homework/add/{teacher_id}/{class_id}/(teacher_id=${teacher_id},class_id=${class_id})}" th:method="post">
-    <!--<form>-->
-    <label>
-        作业名称：
-        <input name="homeworkId" type="text"/>
-    </label><br>
-    <label>
-        作业内容：
-        <textarea name="homeworkContent" rows="10" cols="20" ></textarea>
-    </label><br>
-    <input type="submit" value="提交">
-</form>
+    <div class="bigBox">
+        <div>
+            <div style="background-color: white; padding-top: 20px; text-align: center">
+                <img src="/../static/img/logo.png">
+            </div>
+            <div style="background-color: white; padding-top: 20px; padding-left: 70px">
+                <form class="form" th:action="@{/tec/homework/add/{teacher_id}/{class_id}/(teacher_id=${teacher_id},class_id=${class_id})}" th:method="post">
+                    作业名称：
+                    <input style="margin-bottom: 20px; height: 20px" name="homeworkId" type="text"/><br>
+                    作业内容：
+                    <textarea style="background-color: white" name="homeworkContent" rows="7" cols="50" ></textarea><br>
+                    <input class="button" type="submit" value="提交">
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -3,31 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <title>学生作业</title>
+    <style>
+        *{
+            background-color: #E5F4FF;
+        }
+        .bigBox{
+            margin: 0 auto;
+            width: 600px;
+            height: 400px;
+            /*border: 1px solid #F00;*/
+            background-color: white;
+        }
+        .left{
+            width: 245px;
+            height: 280px;
+            float: left;
+            background-color: white;
+        }
+        .right{
+            width: 350px;
+            height: 300px;
+            margin-top: 60px;
+            float: right;
+            background-color: white;
+        }
+        .logo{
+            width: 210px;
+            padding-left: 90px;
+            padding-top: 50px;
+            padding-bottom: 20px;
+            background-color: white;
+        }
+        .stu{
+            text-align: center;
+            background-color: white;
+        }
+        label{
+            line-height: 30px;
+            background-color: white;
+        }
+        p{
+            background-color: white;
+        }
+        table{
+            border: 1px solid #63ABED;
+            border-collapse: collapse;
+        }
+        .text{
+            border: 1px solid #63ABED;
+            text-align: center;
+            vertical-align: center;
+            padding: 10px;
+            background-color: white;
+        }
+    </style>
 </head>
 <body>
-<p th:text="'姓名：'+${student.name}"></p>
-<p th:text="'学号：'+${student.studentId}"></p>
-<p th:text="'班级：'+${student.classId.classId}"></p>
-<table border="1" align="center">
-    <thead>
-    <tr>
-        <th>标题</th>
-        <th>是否完成</th>
-        <th>分数</th>
-        <th>进入作业</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="classTbl : ${allHomework}">
-        <td th:text="${classTbl.getHomeworkId().getHomeworkId()}"></td>
-        <td th:text="${classTbl.getHomeworkStatus()}"></td>
-        <td th:text="${classTbl.getHomeworkScore()}"></td>
-        <td><a th:href="@{/stu/homework/findOne/{homeworkId}/{studentId}
-            (homeworkId=${classTbl.getHomeworkId().getHomeworkId()}, studentId=${student.studentId})}">查看作业</a></td>
-    </tr>
-    </tbody>
-</table>
+<div class="bigBox">
+    <div class="left">
+        <div class="logo">
+            <img width="100px" height="65px" src="/../static/img/logo.png">
+        </div>
+        <div class="stu">
+            <p th:text="'姓名：'+${student.name}">姓名</p>
+            <p th:text="'学号：'+${student.studentId}">学号</p>
+            <p th:text="'班级：'+${student.classId.classId}">班级</p>
+        </div>
+    </div>
+    <div class="right">
+        <table>
+            <thead>
+                <tr>
+                    <th class="text">标题</th>
+                    <th class="text">是否完成</th>
+                    <th class="text">分数</th>
+                    <th class="text">进入作业</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="classTbl : ${allHomework}">
+                    <td class="text" th:text="${classTbl.getHomeworkId().getHomeworkId()}"></td>
+                    <td class="text" th:text="${classTbl.getHomeworkStatus()}"></td>
+                    <td class="text" th:text="${classTbl.getHomeworkScore()}"></td>
+                    <td class="text"><a style="background-color: white" th:href="@{/stu/homework/findOne/{homeworkId}/{studentId}
+                        (homeworkId=${classTbl.getHomeworkId().getHomeworkId()}, studentId=${student.studentId})}">查看作业</a></td>
+                </tr>
+            </tbody>
+        </table>
 
-
-</body>
-</html>
+    </div>
+</div>
+<body>

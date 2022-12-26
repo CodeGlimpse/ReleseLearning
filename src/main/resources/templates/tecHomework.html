@@ -3,26 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <title>教师作业</title>
+    <style>
+        *{
+            background-color: #E5F4FF;
+        }
+        .bigBox{
+            margin: 0 auto;
+            width: 600px;
+            height: 400px;
+            /*border: 1px solid #F00;*/
+            background-color: white;
+        }
+        .left{
+            width: 275px;
+            height: 280px;
+            float: left;
+            background-color: white;
+        }
+        .right{
+            width: 320px;
+            height: 350px;
+            float: right;
+            background-color: white;
+            margin-top: 50px;
+        }
+        .logo{
+            width: 210px;
+            padding-left: 90px;
+            padding-top: 50px;
+            padding-bottom: 20px;
+            background-color: white;
+        }
+        .text{
+            border: 1px solid #63ABED;
+            text-align: center;
+            vertical-align: center;
+            padding: 5px 25px;
+            background-color: white;
+        }
+        .stu{
+            text-align: center;
+            background-color: white;
+        }
+        p{
+            line-height: 20px;
+            margin-right: 36px;
+            background-color: white;
+        }
+        table{
+            border: 1px solid #63ABED;
+            border-collapse: collapse;
+            margin-left: 10px;
+        }
+        button{
+            height: 30px;
+            width: 120px;
+            border-radius: 15px;
+            background-color: #63ABED;
+            opacity: 80%;
+            font-weight: bold;
+            color: white;
+            margin-top: 20px;
+            margin-left: 35px;
+        }
+        a{
+            background-color: white;
+        }
+    </style>
 </head>
 <body>
-<p th:text="${cla.getTeacherId().getTeacherId()}+'老师'"></p>
-<p th:text="'班级：'+${cla.getClassId()}"></p>
-<a th:href="@{/tec/homework/addPage/{teacher_id}/{class_id}/(teacher_id=${cla.getTeacherId().getTeacherId()},class_id=${cla.getClassId()})}">新建作业</a>
-<table border="1" align="center">
-    <thead>
-    <tr>
-        <th>标题</th>
-        <th>详情</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="classTbl : ${homeworkList}">
-        <td th:text="${classTbl.getHomeworkId()}"></td>
-        <td><a th:href="@{/tec/homework/detail/{id}(id=${classTbl.getHomeworkId()})}">详情</a></td>
-    </tr>
-    </tbody>
-</table>
-
-
+    <div class="bigBox">
+        <div class="left">
+            <div class="logo">
+                <img width="100px" height="65px" src="/../static/img/logo.png">
+            </div>
+            <div class="stu">
+                <p th:text="${cla.getTeacherId().getTeacherId()}+'老师'">姓名</p>
+                <p th:text="'班级：'+${cla.getClassId()}">班级</p>
+            </div>
+        </div>
+        <div class="right">
+            <div style="background-color: white">
+                <p>您的作业列表为：</p>
+                <table>
+                    <thead>
+                    <tr>
+                        <th class="text">标题</th>
+                        <th class="text">详情</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="classTbl : ${homeworkList}">
+                        <td class="text" th:text="${classTbl.getHomeworkId()}"></td>
+                        <td class="text"><a style="background-color: white" th:href="@{/tec/homework/detail/{id}(id=${classTbl.getHomeworkId()})}">详情</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <a th:href="@{/tec/homework/addPage/{teacher_id}/{class_id}/(teacher_id=${cla.getTeacherId().getTeacherId()},class_id=${cla.getClassId()})}">
+                    <button>新建作业</button>
+                </a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

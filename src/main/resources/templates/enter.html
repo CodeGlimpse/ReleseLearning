@@ -3,17 +3,64 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
+  <style>
+    *{
+      background-color: #E5F4FF;
+    }
+    .bigBox{
+      margin: 0 auto;
+      width: 600px;
+      height: 400px;
+      /*border: 1px solid #F00;*/
+      background-color: white;
+    }
+    img{
+      background-color: white;
+      width: 100px;
+      height: 65px;
+    }
+    .form{
+      height: 160px;
+      background-color: white;
+    }
+    .button{
+      height: 30px;
+      width: 100px;
+      border-radius: 15px;
+      background-color: #63ABED;
+      opacity: 80%;
+      font-weight: bold;
+      color: white;
+      margin-left: 30px;
+    }
+    p{
+      background-color: white;
+    }
+    input{
+      background-color: white;
+    }
+  </style>
 </head>
 <body>
-<p th:text="'作业序号：'+${homeworkDetail.getHomeworkId().getHomeworkId()}"></p>
-<p th:text="'作业内容：'+${homeworkContent.getHomeworkContent()}"></p>
-<p th:text="'作业分数：'+${homeworkDetail.getHomeworkScore()}"></p>
-
-<form method="post" action="/stu/fileUpload" enctype="multipart/form-data">
-  <input type="text" name="homeworkId" style="display: none" th:value="${homeworkDetail.getHomeworkId().getHomeworkId()}"><br>
-  <input type="text" name="studentId" style="display: none" th:value="${homeworkDetail.getStudentId().getStudentId()}"><br>
-  <input type="file" name="uploadFiles" value="请选择文件"><br>
-  <input type="submit" value="提交">
-</form>
+  <div class="bigBox">
+    <div style="text-align: center">
+      <div style="background-color: white; padding-top: 20px">
+        <img src="/../static/img/logo.png">
+      </div>
+      <div style="background-color: white; padding-top: 20px">
+        <p th:text="'作业序号：'+${homeworkDetail.getHomeworkId().getHomeworkId()}">作业序号</p>
+        <p th:text="'作业内容：'+${homeworkContent.getHomeworkContent()}">作业内容</p>
+        <p th:text="'作业分数：'+${homeworkDetail.getHomeworkScore()}">作业分数</p>
+        <form class="form" method="post" action="/stu/fileUpload" enctype="multipart/form-data">
+<!--          textarea后台还没有实现！！！-->
+          <textarea cols="55" rows="6"></textarea><br>
+          <input type="file" name="uploadFiles" value="请选择文件">
+          <input class="button" type="submit" value="提交">
+          <input type="text" name="homeworkId" style="display: none" th:value="${homeworkDetail.getHomeworkId().getHomeworkId()}"><br>
+          <input type="text" name="studentId" style="display: none" th:value="${homeworkDetail.getStudentId().getStudentId()}"><br>
+        </form>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

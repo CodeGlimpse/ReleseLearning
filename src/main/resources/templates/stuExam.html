@@ -3,28 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <title>学生考试</title>
+    <style>
+        *{
+            background-color: #E5F4FF;
+        }
+        .bigBox{
+            margin: 0 auto;
+            width: 600px;
+            height: 400px;
+            /*border: 1px solid #F00;*/
+            background-color: white;
+        }
+        .left{
+            width: 275px;
+            height: 280px;
+            float: left;
+            background-color: white;
+        }
+        .right{
+            width: 320px;
+            height: 300px;
+            margin-top: 60px;
+            float: right;
+            background-color: white;
+        }
+        .logo{
+            width: 210px;
+            padding-left: 90px;
+            padding-top: 50px;
+            padding-bottom: 20px;
+            background-color: white;
+        }
+        .stu{
+            text-align: center;
+            background-color: white;
+        }
+        label{
+            line-height: 30px;
+            background-color: white;
+        }
+        p{
+            background-color: white;
+        }
+        table{
+            border: 1px solid #63ABED;
+            border-collapse: collapse;
+            margin-left: 20px;
+        }
+        .text{
+            border: 1px solid #63ABED;
+            text-align: center;
+            vertical-align: center;
+            padding: 10px;
+            background-color: white;
+        }
+    </style>
 </head>
 <body>
-<p th:text="'姓名：'+${student.getName()}"></p>
-<p th:text="'学号：'+${student.getStudentId()}"></p>
-<p th:text="'班级：'+${student.getClassId().getClassId()}"></p>
-<table border="1" align="center">
-    <thead>
-    <tr>
-        <th>标题</th>
-        <th>考试状态</th>
-        <th>进入考试</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="classTbl : ${allExam}">
-        <td th:text="${classTbl.getExamId().getExamId()}"></td>
-        <td th:text="${classTbl.getExamId().getStatus()}"></td>
-        <td ><a href="enter.html">进入考试</a></td>
-    </tr>
-    </tbody>
-</table>
-
-
+    <div class="bigBox">
+        <div class="left">
+            <div class="logo">
+                <img width="100px" height="65px" src="/../static/img/logo.png">
+            </div>
+            <div class="stu">
+                <p th:text="'姓名：'+${student.getName()}">姓名</p>
+                <p th:text="'学号：'+${student.getStudentId()}">学号</p>
+                <p th:text="'班级：'+${student.getClassId().getClassId()}">班级</p>
+            </div>
+        </div>
+        <div class="right">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="text">序号</th>
+                        <th class="text">考试状态</th>
+                        <th class="text">进入考试</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="classTbl : ${allExam}">
+                        <td class="text" th:text="${classTbl.getExamId().getExamId()}"></td>
+                        <td class="text" th:text="${classTbl.getExamId().getStatus()}"></td>
+                        <td class="text"><a style="background-color: white" href="enter.html">进入考试</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
 </html>

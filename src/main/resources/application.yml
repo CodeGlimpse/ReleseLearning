@@ -16,4 +16,7 @@ spring:
       file-size-threshold: 0
       max-file-size: 1MB
       request-size: 10MB
+  web:
+    resources:
+      static-locations: classpath:/
 
