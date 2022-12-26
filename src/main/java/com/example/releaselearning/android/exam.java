@@ -1,12 +1,9 @@
 package com.example.releaselearning.android;
 
 import cn.hutool.json.JSONUtil;
-import com.alibaba.fastjson2.JSON;
 import com.example.releaselearning.entity.Exam;
-import com.example.releaselearning.entity.Homework;
 import com.example.releaselearning.entity.Student;
 import com.example.releaselearning.repository.ExamRepository;
-import com.example.releaselearning.repository.HomeworkRepository;
 import com.example.releaselearning.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
