@@ -3,7 +3,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/releaseLearning?useUnicode=true&characterEncoding=UTF-8
     username: root
-    password: 123456
+    password: 0613lbc0613
   jpa:
     database: MYSQL
     database-platform: org.hibernate.dialect.MySQL8Dialect
@@ -19,4 +19,10 @@ spring:
   web:
     resources:
       static-locations: classpath:/
-
+server:
+  port: 8080
+  ssl:
+    key-store: classpath:keystore.p12
+    key-store-password: webrtc
+    keyStoreType: PKCS12
+    keyAlias: webrtc
