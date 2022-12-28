@@ -70,7 +70,7 @@
                 <p th:text="'学号：'+${student_id}"></p>
                 <p th:text="'班级：'+${class}"></p>
                 <div style="margin-right: 50px; background-color: white">
-                    <a style="float: left; margin-top: 21px" href="student.html"><button>班级群聊</button></a><br>
+                    <a style="float: left; margin-top: 21px" th:href="@{/stu/chatroom/{studentId}(studentId=${studentId})}"><button>班级群聊</button></a><br>
                     <a style="float: right" th:href="@{/stu/homework/{studentId}(studentId=${studentId})}"><button>作业界面</button></a><br>
                 </div><br>
                 <a th:href="@{/stu/exam/{studentId}(studentId=${studentId})}">

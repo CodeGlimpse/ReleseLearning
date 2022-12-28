@@ -29,6 +29,7 @@ public class exam {
         Optional<Student> student = studentRepository.findById(studentId);
         List<Exam> examList = examRepository.findExamByClassId(student.get().getClassId());
         String msg = JSONUtil.toJsonStr(examList);
+        System.out.println(msg);
         return msg;
     }
 }

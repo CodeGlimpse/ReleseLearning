@@ -26,5 +26,5 @@ public interface HwDetailRepository extends JpaRepository<HwDetail, String> {
     Integer updateHwDetailsById(@Param("homework_score") int homeworkScore,@Param("id") int id);
 
 
-
+    Optional<HwDetail> findHwDetailByStudentIdAndHomeworkId(Student studentId, Homework homeworkId);
 }
