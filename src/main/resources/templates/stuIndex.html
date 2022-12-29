@@ -7,22 +7,12 @@
         #selfView {
             background: #000000;
             display: inline;
-            height: 120px;
-            width: 150px;
+            height: 80px;
+            width: 130px;
             margin: 20px;
+            float: right;
         }
 
-        .videoElement {
-            background: #525b63;
-            border: 12px solid #303e4a;
-            border-radius: 5px;
-            -moz-border-radius: 5px;
-            -webkit-border-radius: 5px;
-        }
-
-        .videoElement.active {
-            border: 12px solid #FFFFFF;
-        }
         *{
             background-color: #E5F4FF;
         }
@@ -37,6 +27,9 @@
             background-color: white;
             width: 100px;
             height: 65px;
+            float: left;
+            margin-left: 250px;
+            margin-top: 30px
         }
         .form{
             height: 160px;
@@ -62,19 +55,17 @@
     </style>
 </head>
 <body onbeforeunload="disconnect();">
-<div id="remoteVideosContainer"></div>
+<!--<div id="remoteVideosContainer"></div>-->
 
-
-<div id="selectedVideosContainer">
-    <video id="selfView"></video>
-<!--    <video id="remoteView"></video>-->
-</div>
 <div class="bigBox" >
     <div style="text-align: center">
-        <div style="background-color: white; padding-top: 20px">
+        <div style="background-color: white; width: 600px; height: 80px">
             <img src="/../static/img/logo.png">
+            <div id="selectedVideosContainer">
+                <video id="selfView"></video>
+            </div>
         </div>
-        <div style="background-color: white; padding-top: 20px">
+        <div style="background-color: white; padding-top: 40px">
             <p th:text="'考试名称：'+${examDetail.getExamId().getExamId()}">考试名称</p>
             <a th:href="@{/stu/exam/file/{id}(id=${examDetail.getId()})}"><p th:text="'考试内容：下载试卷'"></p></a>
             <p th:text="'考试状态：'+${examDetail.getExamId().getStatus()}">考试序号</p>

@@ -6,10 +6,13 @@
     <link href="../static/css/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body onbeforeunload="disconnect();">
-<div id="remoteVideosContainer"></div>
+<!--<div id="remoteVideosContainer"></div>-->
 <div id="selectedVideosContainer">
     <video id="selfView"></video>
-    <video id="remoteView"></video>
+    <div style="height: 200px; width: 100px; float: right; margin-right: 20px">
+        <img width="100px" height="65px" style="margin-top: 20px" src="../static/img/logo.png">
+        <video id="remoteView"></video>
+    </div>
 </div>
 
 <script>
