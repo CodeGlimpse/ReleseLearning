@@ -138,9 +138,9 @@ public class TecHomeworkController {
             byte[] pb = new byte[1024];
 
             //测试用的代码
-            //URL url = new URL("file:///D:/libingyu.docx");
+//            URL url = new URL("file:///D:/libingyu.docx");
             //实际项目代码
-            URL url = new URL(hwDetail.get().getHomeworkFile());
+            URL url = new URL("file:///"+hwDetail.get().getHomeworkFile());
 
             URLConnection urlc = url.openConnection();
             InputStream inputStream = urlc.getInputStream();

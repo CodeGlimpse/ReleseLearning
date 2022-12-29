@@ -15,7 +15,7 @@ import java.util.Optional;
 public interface ExamDetailRepository extends JpaRepository<ExamDetail, String> {
     List<ExamDetail> findExamDetailByStudentId(Student studentId);
 
-    List<ExamDetail> findExamDetailByExamId(Exam exam);
+    List<ExamDetail> findExamDetailsByExamId(Exam exam);
 
     @Query(nativeQuery = true,value = "select * from tbl_exam_detail where id=?")
     Optional<ExamDetail> findExamDetailById(int id);
@@ -25,4 +25,6 @@ public interface ExamDetailRepository extends JpaRepository<ExamDetail, String> 
     Integer updateExamDetailsById(@Param("exam_score") int examScore, @Param("id") int id);
 
     Optional<ExamDetail> findExamDetailByStudentIdAndExamId(Student studentId ,  Exam examId);
+
+    Optional<ExamDetail> findExamDetailByExamId(Exam exam);
 }

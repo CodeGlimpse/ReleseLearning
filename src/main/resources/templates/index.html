@@ -1,16 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>Spring Boot WebRTC Demo</title>
     <link href="../static/css/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body onbeforeunload="disconnect();">
-<div id="selectedVideosContainer">
-    <video id="remoteView"></video>
-    <video id="selfView"></video>
-</div>
 <div id="remoteVideosContainer"></div>
+<div id="selectedVideosContainer">
+    <video id="selfView"></video>
+    <video id="remoteView"></video>
+</div>
 
+<script>
+    var container = document.getElementById("remoteVideosContainer");
+    let selfView = document.getElementById("selfView");
+    let remoteView = document.getElementById("remoteView");
+</script>
 <script src='../static/js/adapter-latest.js'></script>
 <script src='../static/js/main.js'></script>
 </body>

@@ -141,7 +141,7 @@ public class TecExamController {
         System.out.println(examId);
         if(exam.isPresent()){
             System.out.println("nihao");
-            List<ExamDetail> exams = examDetailRepository.findExamDetailByExamId(exam.get());
+            List<ExamDetail> exams = examDetailRepository.findExamDetailsByExamId(exam.get());
             map.put("exams",exams);
             map.put("examId",examId);
         }
@@ -227,6 +227,22 @@ public class TecExamController {
         return modelAndView;
     }
 
+//教师监考
+    @GetMapping("exam/vcs/{exam_status}/{exam_id}")
+    public ModelAndView examDetail(@PathVariable String exam_status,@PathVariable String exam_id){
+        return postExamDetail(exam_status,exam_id);
+    }
+
+    @PostMapping("exam/vcs/{exam_status}/{exam_id}")
+    public ModelAndView postExamDetail(@PathVariable String exam_status,@PathVariable String exam_id){
+        ModelAndView modelAndView = new ModelAndView();
+        Optional<Exam> tmp = examRepository.findById(exam_id);
+        Exam exam = tmp.get();
+        if (exam_status.equals("正在考试")) {
+            modelAndView.setViewName("redirect:/webrtc");
+        }
+        return modelAndView;
+    }
 
 
 }

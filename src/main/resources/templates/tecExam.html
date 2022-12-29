@@ -100,7 +100,11 @@
                             <a style="background-color: white" th:if="${classTbl.getStatus()} eq '正在考试'" th:href="@{/tec/exam/end/{id}(id=${classTbl.getExamId()})}">结束考试</a>
                             <p th:if="${classTbl.getStatus()} eq '考试结束'">考试已结束</p>
                         </td>
-                        <td class="text"><a style="background-color: white" th:href="@{/tec/exam/detail/{examId}(examId=${classTbl.getExamId()})}">详情</a></td>
+                        <td class="text">
+                            <a style="background-color: white" th:if="${classTbl.getStatus()} eq '未开始'" th:href="@{/tec/exam/detail/{examId}(examId=${classTbl.getExamId()})}">详情</a>
+                            <a style="background-color: white" th:if="${classTbl.getStatus()} eq '正在考试'" th:href="@{/tec/exam/vcs/{exam_status}/{id}(exam_status=${classTbl.getStatus()},id=${classTbl.getExamId()})}">详情</a>
+                            <a style="background-color: white" th:if="${classTbl.getStatus()} eq '考试结束'" th:href="@{/tec/exam/detail/{examId}(examId=${classTbl.getExamId()})}">详情</a>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

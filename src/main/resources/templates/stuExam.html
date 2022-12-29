@@ -84,7 +84,10 @@
                     <tr th:each="classTbl : ${allExam}">
                         <td class="text" th:text="${classTbl.getExamId().getExamId()}"></td>
                         <td class="text" th:text="${classTbl.getExamId().getStatus()}"></td>
-                        <td class="text"><a style="background-color: white" href="enter.html">进入考试</a></td>
+                        <td class="text"><a style="background-color: white"
+                                            th:href="@{/webrtc/exam/detail/{examId}/{studentId}
+                                            (examId=${classTbl.getId()},studentId=${student.getStudentId()})}">进入考试</a></td>
+
                     </tr>
                 </tbody>
             </table>

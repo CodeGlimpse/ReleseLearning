@@ -8,11 +8,18 @@ body {
     margin: 20px;
 }
 
-#remoteView, #selfView {
+ #selfView {
     background: #000000;
     display: inline;
     height: 360px;
     width: 480px;
+    margin: 20px;
+}
+#remoteView{
+    background: #000000;
+    display: inline;
+    height: 0px;
+    width: 0px;
     margin: 20px;
 }
 

@@ -3180,7 +3180,7 @@
                         var getSupportedFacingModeLies = browserDetails.version < 61;
 
                         if ((face && (face.exact === 'user' || face.exact === 'environment' ||
-                            face.ideal === 'user' || face.ideal === 'environment')) &&
+                                face.ideal === 'user' || face.ideal === 'environment')) &&
                             !(navigator.mediaDevices.getSupportedConstraints &&
                                 navigator.mediaDevices.getSupportedConstraints().facingMode &&
                                 !getSupportedFacingModeLies)) {

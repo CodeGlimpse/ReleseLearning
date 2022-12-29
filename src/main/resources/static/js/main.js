@@ -11,7 +11,7 @@ var localStream;
 var connections = {};
 var uuidInBig;
 
-var container = document.getElementById("remoteVideosContainer");
+// var container = document.getElementById("remoteVideosContainer");
 
 /**
  * this initiate websocket connection
@@ -24,6 +24,7 @@ function init() {
         console.log("Stream OK");
         localStream = stream;
         selfView.srcObject = localStream;
+        selfView.play();
         ws = new WebSocket('wss://' + window.location.hostname + ':' + PORT + MAPPING);
         ws.onmessage = processWsMessage;
         ws.onopen = logMessage;
