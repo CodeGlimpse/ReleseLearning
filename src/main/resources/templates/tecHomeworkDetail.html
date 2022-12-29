@@ -70,12 +70,12 @@
                                    th:text="${hwDetail.getHomeworkFile()}"></a>
                             </td>
 
-                            <td th:if="${hwDetail.getHomeworkScore() != 9999 }">
+                            <td th:if="${hwDetail.getHomeworkScore() != -1 }">
                                 <input name="homeworkScore" type="text" maxlength="4" th:value="${hwDetail.getHomeworkScore()}">
                             </td>
-<!--                            <td th:if="${hwDetail.getHomeworkScore() == 9999 }">-->
-<!--                                <input name="homeworkScore" type="text" maxlength="4" th:value="未评分">-->
-<!--                            </td>-->
+                            <td th:if="${hwDetail.getHomeworkScore() == -1 }">
+                                <input name="homeworkScore" type="text" maxlength="4" th:value="未评分">
+                            </td>
                             <td th:text="${hwDetail.getHomeworkId().getHomeworkId()}"></td>
                             <td th:text="${hwDetail.getStudentId().getStudentId()}"></td>
                             <td th:text="${hwDetail.getHomeworkStatus()}"></td>

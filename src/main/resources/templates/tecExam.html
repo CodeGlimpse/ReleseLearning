@@ -88,7 +88,7 @@
                     <thead>
                     <tr>
                         <th class="text">标题</th>
-                        <th class="text">操作</th>
+                        <th class="text">状态</th>
                         <th class="text">详情</th>
                     </tr>
                     </thead>
@@ -100,7 +100,7 @@
                             <a style="background-color: white" th:if="${classTbl.getStatus()} eq '正在考试'" th:href="@{/tec/exam/end/{id}(id=${classTbl.getExamId()})}">结束考试</a>
                             <p th:if="${classTbl.getStatus()} eq '考试结束'">考试已结束</p>
                         </td>
-                        <td class="text"><a style="background-color: white" th:href="@{/tec/exam/detail/{id}(id=${classTbl.getExamId()})}">详情</a></td>
+                        <td class="text"><a style="background-color: white" th:href="@{/tec/exam/detail/{examId}(examId=${classTbl.getExamId()})}">详情</a></td>
                     </tr>
                     </tbody>
                 </table>

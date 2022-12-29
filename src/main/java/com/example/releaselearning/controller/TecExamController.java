@@ -1,9 +1,7 @@
 package com.example.releaselearning.controller;
 
+import com.example.releaselearning.entity.*;
 import com.example.releaselearning.entity.Class;
-import com.example.releaselearning.entity.Exam;
-import com.example.releaselearning.entity.ExamDetail;
-import com.example.releaselearning.entity.Student;
 import com.example.releaselearning.repository.ClassRepository;
 import com.example.releaselearning.repository.ExamDetailRepository;
 import com.example.releaselearning.repository.ExamRepository;
@@ -16,6 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.awt.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -123,4 +128,105 @@ public class TecExamController {
         }
         return modelAndView;
     }
+
+    //点击详情到查看考试界面
+    @GetMapping("/exam/detail/{examId}")
+    public String getExamDetailPage(Map<String, Object> map, @PathVariable String examId) {
+        return postExamDetailPage(map,examId);
+    }
+    @PostMapping("/exam/detail/{examId}")
+    public String postExamDetailPage(Map<String,Object> map,@PathVariable String examId){
+
+        Optional<Exam> exam = examRepository.findById(examId);
+        System.out.println(examId);
+        if(exam.isPresent()){
+            System.out.println("nihao");
+            List<ExamDetail> exams = examDetailRepository.findExamDetailByExamId(exam.get());
+            map.put("exams",exams);
+            map.put("examId",examId);
+        }
+
+        return "tecExamDetail";
+    }
+
+    //修改分数
+    @PostMapping("/examScore/{id}")
+    public ModelAndView updateExamScore(@PathVariable int id, String examScore){
+        examDetailRepository.updateExamDetailsById(Integer.valueOf(examScore),id);
+        Optional<ExamDetail> examDetail = examDetailRepository.findExamDetailById(id);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/tec/exam/detail/" + examDetail.get().getExamId().getExamId());
+        return modelAndView;
+    }
+
+    //打开文件
+    @GetMapping("/exam/file/{id}")
+    public ModelAndView getOpenHomeworkFile(@PathVariable int id){
+        ModelAndView modelAndView = new ModelAndView();
+        Optional<ExamDetail> examDetail = examDetailRepository.findExamDetailById(id);
+        if(examDetail.isPresent()){
+            //测试使用的,已测试过这句话并不会新建一个文件，也并不会因为路径不存在而发生错误。
+            // txt、word文件都已经测试过可以成功创建、复制并打开
+            //File source = new File("E:\\12345.docx");
+            //实际代码为
+            File source = new File(examDetail.get().getExamFile());
+
+            //1、创建本地待接收的远程文件。
+            String path = "D:/"+ "/"+examDetail.get().getExamId().getExamId() +"_" + examDetail.get().getStudentId().getStudentId()+"_" + source.getName();
+            File f = new File(path);
+            try {
+                System.out.println(f.getAbsolutePath());
+                if(!f.exists()){
+                    f.createNewFile();
+                }
+                //2、创建本地至服务器端的远程连接
+                FileOutputStream fileOutputStream = new FileOutputStream(f);
+                byte[] pb = new byte[1024];
+
+                //测试用的代码
+                //URL url = new URL("file:///D:/libingyu.docx");
+                //实际项目代码
+                URL url = new URL(examDetail.get().getExamFile());
+
+                URLConnection urlc = url.openConnection();
+                InputStream inputStream = urlc.getInputStream();
+                //3、将服务器端文件写入输入流，从输入流中将内容写入本地文件，完成文件下载。
+                int length = -1;
+                while (true){
+                    length = inputStream.read(pb);
+                    if(length<0){
+                        fileOutputStream.flush();
+                        break;
+                    }else {
+                        fileOutputStream.write(pb,0,length);
+                    }
+                }
+                inputStream.close();
+                fileOutputStream.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            //打开文件
+            if(Desktop.isDesktopSupported()){
+                System.out.println("Desktop is supported");
+                Desktop desktop = Desktop.getDesktop();
+                //File f = new File("D:\\key.txt");
+                if(f.exists()){
+                    System.out.println("wenjianyou");
+                    try {
+                        desktop.open(f);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+            modelAndView.setViewName("redirect:/tec/exam/detail/" + examDetail.get().getExamId().getExamId());
+        }else{
+            modelAndView.setViewName("redirect:/error");
+        }
+        return modelAndView;
+    }
+
+
+
 }

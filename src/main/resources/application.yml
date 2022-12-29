@@ -3,7 +3,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/releaseLearning?useUnicode=true&characterEncoding=UTF-8
     username: root
-    password: 0613lbc0613
+    password: 123456
   jpa:
     database: MYSQL
     database-platform: org.hibernate.dialect.MySQL8Dialect
