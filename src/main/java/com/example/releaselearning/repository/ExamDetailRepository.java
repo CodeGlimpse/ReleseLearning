@@ -23,4 +23,6 @@ public interface ExamDetailRepository extends JpaRepository<ExamDetail, String> 
     @Modifying
     @Query(nativeQuery = true,value = "update tbl_exam_detail set exam_score=? where id=?")
     Integer updateExamDetailsById(@Param("exam_score") int examScore, @Param("id") int id);
+
+    Optional<ExamDetail> findExamDetailByStudentIdAndExamId(Student studentId ,  Exam examId);
 }

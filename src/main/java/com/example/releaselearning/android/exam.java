@@ -1,8 +1,8 @@
 package com.example.releaselearning.android;
 
 import cn.hutool.json.JSONUtil;
-import com.example.releaselearning.entity.Exam;
-import com.example.releaselearning.entity.Student;
+import com.example.releaselearning.entity.*;
+import com.example.releaselearning.repository.ExamDetailRepository;
 import com.example.releaselearning.repository.ExamRepository;
 import com.example.releaselearning.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +23,9 @@ public class exam {
     @Autowired
     private ExamRepository examRepository;
 
+    @Autowired
+    private ExamDetailRepository examDetailRepository;
+
     @ResponseBody
     @GetMapping("/getExamAllByStuId/{studentId}")
     public String getHomeWorkAllByStuId(@PathVariable String studentId){
@@ -30,6 +33,21 @@ public class exam {
         List<Exam> examList = examRepository.findExamByClassId(student.get().getClassId());
         String msg = JSONUtil.toJsonStr(examList);
         System.out.println(msg);
+        return msg;
+    }
+
+    @ResponseBody
+    @GetMapping("/getExamWorkByStudentIdAndExamId/{studentId}/{examId}")
+    public String getExamWorkByStudentIdAndExamId(@PathVariable String studentId ,@PathVariable String examId){
+        Optional<Student> student = studentRepository.findById(studentId);
+        Optional<Exam> exam = examRepository.findById(examId);
+        Optional<ExamDetail> examDetail = examDetailRepository.findExamDetailByStudentIdAndExamId(student.get() , exam.get());
+
+        String msg = "";
+
+        if(examDetail.isPresent()){
+            msg = JSONUtil.toJsonStr(examDetail.get());
+        }
         return msg;
     }
 }
